@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="LunaLander_app" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apache-maven" target="1.7" />
+      <module name="LunaLander_app" target="1.11" />
+      <module name="maven" target="1.7" />
+      <module name="maven-artifact" target="1.7" />
+      <module name="maven-builder-support" target="1.7" />
+      <module name="maven-compat" target="1.7" />
+      <module name="maven-core" target="1.7" />
+      <module name="maven-embedder" target="1.7" />
+      <module name="maven-model" target="1.7" />
+      <module name="maven-model-builder" target="1.7" />
+      <module name="maven-plugin-api" target="1.7" />
+      <module name="maven-repository-metadata" target="1.7" />
+      <module name="maven-resolver-provider" target="1.7" />
+      <module name="maven-settings" target="1.7" />
+      <module name="maven-settings-builder" target="1.7" />
+      <module name="maven-slf4j-provider" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

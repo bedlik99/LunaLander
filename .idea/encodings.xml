@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/apache-maven" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-artifact" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-builder-support" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-compat" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-embedder" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-model-builder" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-plugin-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-repository-metadata" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-resolver-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-settings" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-settings-builder" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../apache-maven-3.6.3/maven-slf4j-provider" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

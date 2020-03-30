@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/apache-maven/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-artifact/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-builder-support/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-compat/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-core/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-embedder/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-model-builder/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-model/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-plugin-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-repository-metadata/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-resolver-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-settings-builder/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-settings/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/maven-slf4j-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/../apache-maven-3.6.3/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectKey">
+    <option name="state" value="project://e79810c8-c5c8-43b1-b19c-90c1f4095425" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Oracle_11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,44 @@
+{
+  "mainWindowTitle":"GameTypeChoice",
+  "windowWidth":900,
+  "windowHeight":800,
+  "numberOfLevels":5,
+  "level": {
+    "levelName": [
+      "1 Level",
+      "2 Level",
+      "3 Level",
+      "4 Level",
+      "5 Level"
+    ],
+    "levelFileJson": [
+      "level_1.json",
+      "level_2.json",
+      "level_3.json",
+      "level_4.json",
+      "level_5.json"
+    ],
+    "difficultyLevel": {
+      "healthPoint": [
+        6,
+        3,
+        1
+      ],
+      "gravityForce": [
+        0.5,
+        1,
+        2.5
+      ],
+      "amountOfFuel": [
+        100,
+        75,
+        45
+      ],
+      "basicPointsForLevel": [
+        150,
+        200,
+        300
+      ]
+    }
+  }
+}
