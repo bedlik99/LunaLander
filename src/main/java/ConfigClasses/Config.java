@@ -5,8 +5,8 @@ public final class Config {
 
     // Pliki konfiguracyjne okna/okien -> "zewnetrzne"
     private String mainWindowTitle;
-    private int windowWidth;
-    private int windowHeight;
+    private double windowWidth;
+    private double windowHeight;
 
     // Pliki konfiguracyjne gry -> "wewnetrzne"
     private int numberOfLevels;
@@ -17,11 +17,11 @@ public final class Config {
         return mainWindowTitle;
     }
 
-    public int getWindowWidth() {
+    public double getWindowWidth() {
         return windowWidth;
     }
 
-    public int getWindowHeight() {
+    public double getWindowHeight() {
         return windowHeight;
     }
 

@@ -1,22 +1,31 @@
 package controlWindow;
 
+import ConfigClasses.ModelClasses.LevelModel;
 import DataModelJSON.JsonData;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import ConfigClasses.Config;
 
 
 public class Main extends Application {
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
         Config config = JsonData.getConfig();
+
         Parent root = FXMLLoader.load(getClass().getResource("/MainGameWindow.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle(config.getMainWindowTitle());
         primaryStage.setScene(new Scene(root, config.getWindowWidth(), config.getWindowHeight()));
         primaryStage.show();
 
@@ -27,7 +36,9 @@ public class Main extends Application {
     public void init() throws Exception {
 
        JsonData.loadConfigFile();
+       JsonData.loadLevelFile();
 /*
+
        Config config = JsonData.getConfig();
         Level level = config.getLevel();
         DifficultyLevel diffLevel = config.getLevel().getDifficultyLevel();

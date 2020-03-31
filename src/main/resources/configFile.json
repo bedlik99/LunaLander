@@ -1,7 +1,7 @@
 {
-  "mainWindowTitle":"GameTypeChoice",
-  "windowWidth":900,
-  "windowHeight":800,
+  "mainWindowTitle":"LunaLander",
+  "windowWidth":900.0,
+  "windowHeight":700.0,
   "numberOfLevels":5,
   "level": {
     "levelName": [
