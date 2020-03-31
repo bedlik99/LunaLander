@@ -14,7 +14,8 @@
 
 <top>
 
-<GridPane fx:id="gridPane" hgap="10" style="-fx-border-color: orange; -fx-border-width: 3; -fx-border-style: solid" >
+<GridPane fx:id="gridPane" hgap="10" style="-fx-border-color: orange;
+ -fx-border-width: 3; -fx-border-style: solid; -fx-background-color: skyblue " >
 
     <columnConstraints>
         <ColumnConstraints  percentWidth="25" />
@@ -32,7 +33,8 @@
 
 </top>
     <right>
-        <GridPane style="-fx-border-color: purple; -fx-border-width: 3; -fx-border-style: solid">
+        <GridPane style="-fx-border-color: purple;
+         -fx-border-width: 3; -fx-border-style: solid;  -fx-background-color: midnightblue">
 
             <rowConstraints >
                 <RowConstraints percentHeight="20" />
@@ -42,7 +44,7 @@
                 <RowConstraints  percentHeight="20" />
             </rowConstraints>
 
-            <Button text="START" GridPane.rowIndex="1" minHeight="40" minWidth="180"  />
+            <Button text="START" GridPane.rowIndex="1" minHeight="40" minWidth="180"   />
             <Button text="OPCJE" GridPane.rowIndex="2" minHeight="40" minWidth="180"/>
             <Button text="TABELA WYNIKOW" GridPane.rowIndex="3" minHeight="40" minWidth="180"/>
             <Button text="ZAKONCZ" GridPane.rowIndex="4" minHeight="40" minWidth="180"/>
@@ -51,7 +53,9 @@
     </right>
 
 <center>
+<GridPane style="-fx-background-image: url(cosmos.jpg) " >
 
+</GridPane>
 
 </center>
 
