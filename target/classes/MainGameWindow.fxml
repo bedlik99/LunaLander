@@ -14,7 +14,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.shape.Polygon?>
 <BorderPane fx:controller="controlWindow.MainGameWindowController"
-            xmlns:fx="http://javafx.com/fxml" >
+            xmlns:fx="http://javafx.com/fxml"  >
 
 <top>
 
@@ -49,7 +49,7 @@
 </top>
     <right>
         <GridPane style="-fx-border-color: purple;
-         -fx-border-width: 3; -fx-border-style: solid;  -fx-background-image: url(cosmos2.png)">
+         -fx-border-width: 3; -fx-border-style: solid;  -fx-background-image: url(cosmos2.png)" >
 
             <rowConstraints >
                 <RowConstraints percentHeight="20" />
@@ -64,13 +64,13 @@
             <Button text="TABELA WYNIKOW" GridPane.rowIndex="2" minHeight="40" minWidth="180"/>
             <Button text="ZAKONCZ" GridPane.rowIndex="3" minHeight="40" minWidth="180"/>
             <Label text="P - PAUZA" style="-fx-text-fill: goldenrod; -fx-font-size: 20px;
-                -fx-border-color: wheat; -fx-border-width:2"
-                   GridPane.rowIndex="4" GridPane.halignment="CENTER" />
+                -fx-border-color: wheat; -fx-border-width:2"  GridPane.rowIndex="4" GridPane.halignment="CENTER" />
         </GridPane>
     </right>
 
 <center>
-<BorderPane fx:id="gamePane" style="-fx-background-image: url(cosmos3.jpg)" >
+<BorderPane fx:id="gamePane" style="-fx-background-image: url(cosmos3.jpg); -fx-border-color: gold;
+         -fx-border-width: 3; " minWidth="0" minHeight="0"   >
 
 </BorderPane>
 

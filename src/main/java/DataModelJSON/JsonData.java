@@ -6,6 +6,10 @@ package DataModelJSON;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
+
 import ConfigClasses.Config;
 import ConfigClasses.ModelClasses.LevelModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,93 +22,59 @@ import org.json.simple.parser.ParseException;
 
 public abstract class JsonData {
 
-        private static final String configFile = "/home/jahu/Dokumenty/IntelliJ_projects/JavaPrograms/Luna_Lander_PROZE/LunaLander_app/src/main/resources/configFile.json";
-        private static final String levelModelExampleFile = "/home/jahu/Dokumenty/IntelliJ_projects/JavaPrograms/Luna_Lander_PROZE/LunaLander_app/src/main/resources/levelModelExample.json";
-        private static Config config;  // zmienna przechowywujaca nasz plik konfiguracyjny
+        private static Config config;
         private static LevelModel levelModel;
 
+        private static ObjectMapper mapper = getDefaultObjectMapper();
+        private static JSONParser jsonParser = new JSONParser();
+
         public static Config getConfig() {
-                return config;
-        }
+        return config;
+    }
+        public static LevelModel getLevelModel() { return levelModel; }
 
-        public static LevelModel getLevelModel() {
-                return levelModel;
-        }
+    private static ObjectMapper getDefaultObjectMapper() {
+        ObjectMapper defaultObjectMapper = new ObjectMapper();
+        defaultObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false); // gdy chcemy dokladac wiecej elementow, a nie wiemy ile ich bedzie
 
-        private static File jsonFile;
+        return defaultObjectMapper;
+    }
 
-           private static ObjectMapper mapper = getDefaultObjectMapper();
-           private static JSONParser jsonParser = new JSONParser();
+    public static JsonNode readJson(String src) throws IOException {
+        return mapper.readTree(src);
+    }
 
-        private JsonData() { }
+    public static <A> A fromJson(JsonNode node, Class<A> clazz) throws JsonProcessingException {
+        return mapper.treeToValue(node,clazz);
+    }
 
-        private static ObjectMapper getDefaultObjectMapper() {
+    public static JsonNode toJson(Object a) {
+        return mapper.valueToTree(a);
+    }
 
-                ObjectMapper defaultObjectMapper = new ObjectMapper();
-                defaultObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-                // gdy chcemy dokladac wiecej elementow, a nie wiemy ile ich bedzie
-                // ---
-                return defaultObjectMapper;
-        }
+    public static void loadFile(String fileName) {
+        try {
+            URL res = JsonData.class.getResource("/" + fileName);
+            File file = Paths.get(res.toURI()).toFile();
+            String toLoadFile = file.getAbsolutePath();
 
-        public static JsonNode readJson(String src) throws IOException {
+                FileReader jsonFile = new FileReader(toLoadFile);
+                JSONObject obj = (JSONObject) jsonParser.parse(jsonFile);
+                String jsonString = obj.toString();
+                JsonNode node = JsonData.readJson(jsonString);
 
-                return mapper.readTree(src);
-        }
-
-        public static <A> A fromJson(JsonNode node, Class<A> clazz) throws JsonProcessingException {
-
-                return mapper.treeToValue(node,clazz);
-        }
-
-        public static JsonNode toJson(Object a) {
-                return mapper.valueToTree(a);
-
-        }
-
-        public static void loadConfigFile() {
-                try {
-//                        File json = new File(configFile);
-//                        Config config= mapper.readValue(json, Config.class);
-
-                        FileReader jsonFile = new FileReader(configFile);
-                        JSONObject obj = (JSONObject) jsonParser.parse(jsonFile);
-                        String jsonString = obj.toString();
-                       JsonNode node = JsonData.readJson(jsonString);
-                        config = JsonData.fromJson(node,Config.class);
-
-
-
-                }  catch (IOException | ParseException ex) {
-                        ex.printStackTrace();
-
-                }
-        }
-
-
-        // tutaj musze napisac przykladowy jeden i go wczytac
-        public static void loadLevelFile(){
-                try {
-
-//                        File json = new File(configFile);
-//                       Config config= mapper.readValue(json, Config.class);
-
-                        FileReader jsonFile = new FileReader(levelModelExampleFile);
-                        JSONObject obj = (JSONObject) jsonParser.parse(jsonFile);
-                        String jsonString = obj.toString();
-                        JsonNode node = JsonData.readJson(jsonString);
-                        levelModel = JsonData.fromJson(node,LevelModel.class);
-
-                }  catch (IOException | ParseException ex) {
-                        ex.printStackTrace();
-
+                if(fileName.equals("configFile.json")) {
+                    config = JsonData.fromJson(node, Config.class);
+                }else if(fileName.equals("levelModelExample.json")){
+                    levelModel = JsonData.fromJson(node,LevelModel.class);
                 }
 
+        }  catch (IOException | ParseException | URISyntaxException ex) {
+            ex.printStackTrace();
         }
-
+    }
 
         public static void savePlayerInfo(){
-
 
         }
 

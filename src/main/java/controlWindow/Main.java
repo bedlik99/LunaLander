@@ -1,5 +1,7 @@
 package controlWindow;
 
+import ConfigClasses.DifficultyLevel;
+import ConfigClasses.Level;
 import ConfigClasses.ModelClasses.LevelModel;
 import DataModelJSON.JsonData;
 import javafx.application.Application;
@@ -35,11 +37,11 @@ public class Main extends Application {
     @Override
     public void init() throws Exception {
 
-       JsonData.loadConfigFile();
-       JsonData.loadLevelFile();
-/*
+        JsonData.loadFile("configFile.json");
+        JsonData.loadFile("levelModelExample.json");
 
-       Config config = JsonData.getConfig();
+
+/*       Config config = JsonData.getConfig();
         Level level = config.getLevel();
         DifficultyLevel diffLevel = config.getLevel().getDifficultyLevel();
 
@@ -50,12 +52,12 @@ public class Main extends Application {
         System.out.println("Window Height: " + config.getWindowHeight());
         System.out.println("Number of levels: " + config.getNumberOfLevels());
         System.out.println("Level names: ");
-        for(int i =0; i<4;i++){
+        for(int i =0; i<=4;i++){
             System.out.println( level.getLevelName().get(i));
         }
 
         System.out.println("Levels File names: ");
-        for(int i =0; i<4;i++){
+        for(int i =0; i<=4;i++){
             System.out.println( level.getLevelFileJson().get(i));
         }
 
@@ -77,11 +79,11 @@ public class Main extends Application {
         System.out.println("Amount of fuel: for difficulty level: easy -> medium -> hard");
         for(int i =0; i<3;i++){
             System.out.println( diffLevel.getAmountOfFuel().get(i));
-        }
-*/
+        }*/
 
 
     }
+
 
     @Override
     public void stop() throws Exception {
