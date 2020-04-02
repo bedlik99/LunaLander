@@ -1,18 +1,13 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.shape.Polygon?>
+
 <BorderPane fx:controller="controlWindow.MainGameWindowController"
             xmlns:fx="http://javafx.com/fxml"  >
 
@@ -48,8 +43,8 @@
 
 </top>
     <right>
-        <GridPane style="-fx-border-color: purple;
-         -fx-border-width: 3; -fx-border-style: solid;  -fx-background-image: url(cosmos2.png)" >
+        <GridPane style="-fx-border-color: gold;
+         -fx-border-width: 3; -fx-background-image: url(cosmos2.png)" >
 
             <rowConstraints >
                 <RowConstraints percentHeight="20" />
@@ -70,12 +65,16 @@
 
 <center>
 <BorderPane fx:id="gamePane" style="-fx-background-image: url(cosmos3.jpg); -fx-border-color: gold;
-         -fx-border-width: 3; " minWidth="0" minHeight="0"   >
+         -fx-border-width: 3; " minWidth="0" minHeight="0"  prefHeight="670" >
+<top>
+    <HBox fx:id="gamePaneHBox" alignment="CENTER">
+
+    </HBox>
+</top>
 
 </BorderPane>
 
 </center>
-
 
 
 

@@ -43,8 +43,8 @@
 
 </top>
     <right>
-        <GridPane style="-fx-border-color: purple;
-         -fx-border-width: 3; -fx-border-style: solid;  -fx-background-image: url(cosmos2.png)" >
+        <GridPane style="-fx-border-color: gold;
+         -fx-border-width: 3; -fx-background-image: url(cosmos2.png)" >
 
             <rowConstraints >
                 <RowConstraints percentHeight="20" />
@@ -65,12 +65,16 @@
 
 <center>
 <BorderPane fx:id="gamePane" style="-fx-background-image: url(cosmos3.jpg); -fx-border-color: gold;
-         -fx-border-width: 3; " minWidth="0" minHeight="0"   >
+         -fx-border-width: 3; " minWidth="0" minHeight="0"  prefHeight="670" >
+<top>
+    <HBox fx:id="gamePaneHBox" alignment="CENTER">
+
+    </HBox>
+</top>
 
 </BorderPane>
 
 </center>
-
 
 
 

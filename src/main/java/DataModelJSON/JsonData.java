@@ -52,6 +52,7 @@ public abstract class JsonData {
         return mapper.valueToTree(a);
     }
 
+
     public static void loadFile(String fileName) {
         try {
             URL res = JsonData.class.getResource("/" + fileName);

@@ -14,7 +14,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -25,7 +24,6 @@
                     <groupId>org.hamcrest</groupId>
                 </exclusion>
             </exclusions>
-
         </dependency>
 
 
