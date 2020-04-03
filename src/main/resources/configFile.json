@@ -2,21 +2,12 @@
   "mainWindowTitle":"LunaLander",
   "windowWidth":900.0,
   "windowHeight":700.0,
-  "numberOfLevels":5,
+  "numberOfLevels":3,
   "level": {
     "levelName": [
       "1 Level",
       "2 Level",
-      "3 Level",
-      "4 Level",
-      "5 Level"
-    ],
-    "levelFileJson": [
-      "level_1.json",
-      "level_2.json",
-      "level_3.json",
-      "level_4.json",
-      "level_5.json"
+      "3 Level"
     ],
     "difficultyLevel": {
       "healthPoint": [

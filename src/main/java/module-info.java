@@ -9,7 +9,7 @@ module LunaLander {
     opens ConfigClasses;
     opens controlWindow;
     opens DataModelJSON;
-    opens ConfigClasses.ModelClasses;
+    opens ConfigClasses.LevelModelClasses;
 
 
 }

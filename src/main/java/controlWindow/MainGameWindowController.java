@@ -1,31 +1,50 @@
 package controlWindow;
 
-import ConfigClasses.ModelClasses.LevelModel;
+import ConfigClasses.LevelModelClasses.LevelModel1;
 import DataModelJSON.JsonData;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 
+/**
+ * Klasa Controller, która będzie odpowiedzialna za obsługę zdarzeń głównego okna programu
+ */
 public class MainGameWindowController {
 
+    /**
+     * Zmienna opisująca pole gry - Graficzny kontener obiektów interfejsu użytkownika
+     */
     @FXML
     private BorderPane gamePane;
-
+    /**
+     * Zmienna opisująca pasek zmiany paliwa
+     */
     @FXML
-    private ProgressBar progressBar;
+    private ProgressBar amountOfFuel;
 
+    /**
+     * Zmienna zawierająca się w polu gry, będąca również pewnym kontenerem obiektów użytkownika.
+     * Jest "dzieckiem" zmiennej gamePane
+     */
     @FXML
     private HBox gamePaneHBox;
 
+    /**
+     * Wielokąt opisujący powierzchnię planety
+     */
     private Polygon surfaceShapePolygon;
+    /**
+     * Wielokąt opisujący statek kosmiczny
+     */
     private Polygon spaceCraftPolygon;
-    private LevelModel levelModel = JsonData.getLevelModel();
+    /**
+     * Obiekt będący modelem konkretnego poziomu (poziom1,poziom2,...)
+     * Nie tworze instancji przypisuję gotową instancję klasy będącej atrybutem klasy JsonData.
+     */
+    private LevelModel1 levelModel1 = JsonData.getLevelModel1();
 
     public void initialize() {
         surfaceShapePolygon = new Polygon();
@@ -33,15 +52,30 @@ public class MainGameWindowController {
 
         gamePaneHBox.getChildren().add(spaceCraftPolygon);
         gamePane.setBottom(surfaceShapePolygon);
-        levelModel.paint_example_level_surface(surfaceShapePolygon,spaceCraftPolygon);
+        levelModel1.paint_example_level_surface(surfaceShapePolygon,spaceCraftPolygon);
 
         gamePane.widthProperty().addListener(new ChangeListener<Number>() {
             private double basicSurfaceWidth = getBasicWidth(surfaceShapePolygon);
             private double basicSpaceCraftWidth = getBasicWidth(spaceCraftPolygon);
 
+            /**
+             * Funkcja ChangeListener'a, polega ona "słuchaniu" zmian wartości, we własnościach wcześniej zaznaczonych
+             * Tutaj jest tym gamePane.widthProperty() czyli szerokość obszaru gry.
+             *
+             * Funkcja ma za zadanie odpowiednie skalowanie i przesuwanie elemementów gry: statku oraz powierzchni planety
+             * jeżeli zmieni się szerokość obszaru z grą.
+             *
+             * <p> Koncepcja skalowania i przesuwania została stworzona. Wykorzystuje fakt ze skalowanie odbywa się:
+             * "od" środka obiektu na obie strony i w danej osi - tutaj X (szerokość).  *.setScale() </p>
+             *
+             * <p>Po odpowiednim przeskalowaniu nalezy przesunąć obiekt o odpowiednią wartość żeby nie znikał z okna,
+             *  ale tylko utrzymał swoją pozycję - w innej skali </p>
+             * @param observableValue Szerokość pola gry
+             * @param oldValue Stara szerokość
+             * @param newValue Nowa Szerokosć
+             */
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                System.out.println(gamePane.getWidth());
                 if (basicSurfaceWidth < (double) newValue) {
                     // System.out.println("Rozszerzam");
                     double ratioMoreThan1 = (double) newValue / basicSurfaceWidth;
@@ -65,7 +99,16 @@ public class MainGameWindowController {
             }
         });
 
+
         gamePane.heightProperty().addListener(new ChangeListener<Number>() {
+
+            /**
+             * Metoda patrzy na zmiany wysokości "okna" z grą.
+             * Koncepcja taka sama jak w przypadku szerokości. Patrz gamePane.widthProperty()...
+             * @param observableValue Wysokość okna
+             * @param oldValue Stara szerokość
+             * @param newValue Nowa Szerokość
+             */
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
                 double basicGamePaneHeight = gamePane.getPrefHeight();
@@ -87,7 +130,7 @@ public class MainGameWindowController {
                     surfaceShapePolygon.setTranslateY((basicPolygonHeight * ratioMoreThan1 / 2 - basicPolygonHeight / 2) * (-1));
 
                     spaceCraftPolygon.setScaleY(ratioMoreThan1);
-                    spaceCraftPolygon.setTranslateY((basicSpaceCraftHeight * ratioMoreThan1 / 2 - basicSpaceCraftHeight / 2) * (-1));
+                    spaceCraftPolygon.setTranslateY((basicSpaceCraftHeight * ratioMoreThan1 / 2 - basicSpaceCraftHeight / 2));
                 }
 
             }
@@ -96,6 +139,12 @@ public class MainGameWindowController {
 
     }
 
+    /**
+     * Funkcja wyliczająca podstawową szerokość wielokąta - powierzchni planety, statku kosmicznego
+     * Wartość zwraca potrzebna do przeskalowania konkretnego elementu
+     * @param polygon Wielokąt opisujący pole powierzchni/ statek kosmiczny
+     * @return Wartość podstawowej szerokości
+     */
     private double getBasicWidth(Polygon polygon){
          int points = polygon.getPoints().size();
        return  (polygon.getPoints().get(points - 2));
