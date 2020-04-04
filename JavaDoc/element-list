@@ -1,5 +1,11 @@
 module:LunaLander
 ConfigClasses
+<<<<<<< HEAD
 ConfigClasses.LevelModelClass
 DataModelJSON
 mainWindow
+=======
+ConfigClasses.LevelModelClasses
+controlWindow
+DataModelJSON
+>>>>>>> d34fab4fc09ed8e0b4c925e7cecea81d091d5f43
