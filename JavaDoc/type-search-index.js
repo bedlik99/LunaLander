@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ConfigClasses","l":"Config"},{"p":"ConfigClasses","l":"DifficultyLevel"},{"p":"DataModelJSON","l":"JsonData"},{"p":"ConfigClasses","l":"Level"},{"p":"ConfigClasses.LevelModelClass","l":"LevelModel"},{"p":"mainWindow","l":"Main"},{"p":"mainWindow","l":"MainGameWindowController"}]

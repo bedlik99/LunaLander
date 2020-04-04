@@ -11,7 +11,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 
 import ConfigClasses.Config;
-import ConfigClasses.LevelModelClasses.LevelModel1;
+import ConfigClasses.LevelModelClass.LevelModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -52,9 +52,9 @@ public abstract class JsonData {
      * <p>Zmienne konfiguracyjne to wartości wierzchołków wielokątów opisujących powierzchnię planety i statek kosmiczny.</p>
      * Konstruktor klasy jest konstruktorem domyślnym - nie zawierającym inicjalizującego zmienne kodu.
      * <p>Jest to jedyna instancja klasy przedstawiającej model poziomu w całym programie</p>
-     * @see LevelModel1
+     * @see LevelModel
      */
-        private static LevelModel1 levelModel1;
+        private static LevelModel levelModel1,levelModel2,levelModel3;
     /**
      * Obiekt z pozwalający na wczytywanie specyficznego ułożenia danych w pliku *.json i mapowanie go na konkretny
      * Obiekt posiadający dane ułożenie i vice-versa.
@@ -73,10 +73,26 @@ public abstract class JsonData {
         return config;
     }
     /**
-     * @return Obiekt klasy LevelModel1 - obiekt zawierający
-     * @see LevelModel1
+     * @return Obiekt klasy LevelModel - obiekt zawierający model planszy poziomu 1
+     * @see LevelModel
      */
-        public static LevelModel1 getLevelModel1() { return levelModel1; }
+        public static LevelModel getLevelModel1() { return levelModel1; }
+
+    /**
+     * @return Obiekt klasy LevelModel - obiekt zawierający model planszy poziomu 2
+     * @see LevelModel
+     */
+    public static LevelModel getLevelModel2() {
+        return levelModel2;
+    }
+
+    /**
+     * @return Obiekt klasy LevelModel - obiekt zawierający model planszy poziomu 3
+     * @see LevelModel
+     */
+    public static LevelModel getLevelModel3() {
+        return levelModel3;
+    }
 
     /**
      * @return Zwraca Obiekt klasy image - obrazek.png statku kosmicznego, funkcja wywolywana podczas rysowania poziomu
@@ -100,7 +116,7 @@ public abstract class JsonData {
      * którego potem parsujemy na klasę przy pomocy funkcji fromJson i przypisujemy do odpowiedniej klasy.
      * @param src plik *.json po parsowaniu na obiekt klasy JSONObject skonwertowany na obiekt typu String
      * @return  zwraca Obiekt klasy JsonNode, który będzie już bezpośrednio parsowany na Klasę Konfiguracyjną
-     * @throws IOException
+     * @throws IOException Jeżeli coś się nie wczyta
      */
     public static JsonNode readJson(String src) throws IOException {
         return mapper.readTree(src);
@@ -112,8 +128,8 @@ public abstract class JsonData {
      * @param node Obiekt bezpośrednio mapowany na klasę konfiguracyjną
      * @param clazz Klasa konfiguracyjna na która mapujemy
      * @param <A> Klasa konfiguracyjna np. Config, LevelModel1,LevelModel2,...
-     * @return
-     * @throws JsonProcessingException
+     * @return Zwraca obiekt Klasy, której przypisujemy wczytane dane
+     * @throws JsonProcessingException Jeżeli przypisanie się nie powiodło
      */
     public static <A> A fromJson(JsonNode node, Class<A> clazz) throws JsonProcessingException {
         return mapper.treeToValue(node,clazz);
@@ -123,10 +139,9 @@ public abstract class JsonData {
 //        return mapper.valueToTree(a);
 //    }
 
-
     /**
-     * <p>Metoda wczytuje plik konfiguracyjny, wykorzystując funkcję parsowania pliku z *.jsona na klasę konfiguracyjną
-     *  i tym samym inicjalizuje atrybuty obiektu klasy konfiguracyjnej tutaj: config,levelModel1 itd.</p>
+     * <p>Metoda wczytuje plik konfiguracyjny, wykorzystując funkcje parsowania pliku z *.jsona na klasę konfiguracyjną
+     *  i tym samym inicjalizuje atrybuty obiektu klasy konfiguracyjnej, tutaj: config,levelModel1 itd.</p>
      *
      *  Najpierw pobiera adres URL pliku konfiguracyjnego *.json. Dzięki ułożeniu struktury plików przez Maven'a,
      *  posiadamy folder "resources" w którym są pliki źródłowe- obrazki, plik.fxml(określający wygląd okna),pliki konfiguracyjne *.json
@@ -150,7 +165,7 @@ public abstract class JsonData {
                 if(fileName.equals("configFile.json")) {
                     config = JsonData.fromJson(node, Config.class);
                 }else if(fileName.equals("levelModel1.json")){
-                    levelModel1 = JsonData.fromJson(node, LevelModel1.class);
+                    levelModel1 = JsonData.fromJson(node, LevelModel.class);
                 }
 
         }  catch (IOException | ParseException | URISyntaxException ex) {

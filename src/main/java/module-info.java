@@ -7,9 +7,9 @@ module LunaLander {
     requires json.simple;
 
     opens ConfigClasses;
-    opens controlWindow;
+    opens mainWindow;
     opens DataModelJSON;
-    opens ConfigClasses.LevelModelClasses;
+    opens ConfigClasses.LevelModelClass;
 
 
 }

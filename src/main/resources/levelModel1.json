@@ -1,4 +1,6 @@
 {
+  "basicSpaceCraftHeight":50.0,
+  "basicSurfaceHeight":200.0,
   "spaceCraftPolygonPeakValues": [
     0.0,50.0,15.0,0.0,30.0,50.0
   ],

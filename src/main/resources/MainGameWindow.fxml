@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.control.ProgressBar?>
 
-<BorderPane fx:controller="controlWindow.MainGameWindowController"
+<BorderPane fx:controller="mainWindow.MainGameWindowController"
             xmlns:fx="http://javafx.com/fxml"  >
 
 <top>
