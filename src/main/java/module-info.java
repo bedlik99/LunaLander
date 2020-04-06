@@ -1,10 +1,13 @@
 module LunaLander {
-    requires javafx.fxml;
+
     requires javafx.controls;
+    requires javafx.fxml;
 
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires json.simple;
+    requires javafx.graphics;
+
 
     opens ConfigClasses;
     opens mainWindow;
