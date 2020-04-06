@@ -21,7 +21,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="apache-maven" target="1.7" />
-      <module name="LunaLander_app" target="1.11" />
+      <module name="LunaLander_app" target="11" />
       <module name="maven" target="1.7" />
       <module name="maven-artifact" target="1.7" />
       <module name="maven-builder-support" target="1.7" />

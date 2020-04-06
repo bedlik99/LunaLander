@@ -8,11 +8,9 @@ module LunaLander {
     requires json.simple;
     requires javafx.graphics;
 
-
     opens ConfigClasses;
     opens mainWindow;
     opens DataModelJSON;
     opens ConfigClasses.LevelModelClass;
-
 
 }
