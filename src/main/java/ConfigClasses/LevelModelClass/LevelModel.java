@@ -64,7 +64,6 @@ public final class LevelModel {
         surfacePolygon.setFill(Color.GREY);
 
         surfacePolygon.getPoints().addAll(surfacePeakValues);
-
         spaceCraftPolygon.setFill(new ImagePattern(JsonData.getSpaceCraftImage()));
         spaceCraftPolygon.getPoints().addAll(spaceCraftPeakValues);
     }

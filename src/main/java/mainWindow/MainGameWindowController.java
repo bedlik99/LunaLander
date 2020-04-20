@@ -82,27 +82,25 @@ public class MainGameWindowController {
      */
     private final TranslateTransition gravitationTransition = new TranslateTransition();
     private final TranslateTransition playerTransition = new TranslateTransition();
+
     private boolean isSreleased;
+    private double locationForGravitation;
+
 
     public void initialize() {
 
-
-        spaceCraftPolygon.translateYProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldN, Number newN) {
-
-            }
-        });
-
         mainWindowPane.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
             @Override
             public void handle(KeyEvent keyEvent) {
 
                 if (keyEvent.getCode().equals(KeyCode.S)) {
+                    locationForGravitation = spaceCraftPolygon.translateYProperty().getValue();
                     isSreleased = true;
-                   rate =1;
-                   gravitationTransition.setRate(rate);
+                    rate = 0.5;
+                    gravitationTransition.setRate(rate);
 
+                    //System.out.println(gravitationTransition.getRate());
 
                 }
 
@@ -129,14 +127,12 @@ public class MainGameWindowController {
                 if (keyEvent.getCode().equals(KeyCode.S)) {
                     isSreleased = false;
                     accelerateUP();
-                }else{
-                    isSreleased = true;
                 }
 
                 if (keyEvent.getCode().equals(KeyCode.A)) {
                     accelerateToRight();
-
                 }
+
                 if (keyEvent.getCode().equals(KeyCode.D)) {
                     accelerateToLeft();
                 }
@@ -216,11 +212,11 @@ public class MainGameWindowController {
                     spaceCraftPolygon.setScaleY(ratioMoreThan1);
                     spaceCraftPolygon.setTranslateY((basicSpaceCraftHeight / 2 - (basicSpaceCraftHeight / 2) * ratioMoreThan1) * (-1));
 
-                    if (gravitationTransition != null) {
+
                         gravitationTransition.stop();
                         gravitationTransition.setToY(512 * ratioMoreThan1 + (50.0 * ratioMoreThan1 - 50.0));
                         gravitationTransition.play();
-                    }
+
                 } else {
 
                     //  System.out.println("Zmniejszam okno");
@@ -232,12 +228,11 @@ public class MainGameWindowController {
                     spaceCraftPolygon.setTranslateY((basicSpaceCraftHeight * ratioLessThan1 / 2 - basicSpaceCraftHeight / 2));
 
                     // .setRate() - pozwala na zmniejszenie predkosci dzialania animacji - gdy zmniejszamy okno predkosc musi sie skalowac
-                    if (gravitationTransition != null) {
                         gravitationTransition.stop();
                         gravitationTransition.setToY(512 * ratioLessThan1 - (25.0 - 25.0 * ratioLessThan1));
                         //  System.out.println(gravitationTransition.getToY());
                         gravitationTransition.play();
-                    }
+
 
 
                 }
@@ -259,6 +254,8 @@ public class MainGameWindowController {
             gravitationTransition.setNode(spaceCraft);
             gravitationTransition.play();
         }
+
+
     }
 
 
@@ -297,7 +294,6 @@ public class MainGameWindowController {
                 }
 
             }
-
 
         }
     }
@@ -347,7 +343,24 @@ public class MainGameWindowController {
 
 
 
+        spaceCraftPolygon.translateYProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldN, Number newN) {
+               // System.out.println(newN + " : " + isSreleased + " : " + rate);
+               // System.out.println("Aktualna wartosc Y:  "+(double)newN);
+                if(isSreleased && rate!=1){
+                    double wantedYPosition = locationForGravitation+40.0;
+                  //  System.out.println("W momencie puszczenie + 20: " + wantedYPosition);
+                    if((double)newN >= wantedYPosition  ){
+                      //  System.out.println("Zwiekszam rate do 1");
+                        rate = 1;
+                        gravitationTransition.setRate(rate);
 
+                    }
+                }
+
+            }
+        });
 
         animateGravitation(spaceCraftPolygon);
 
@@ -405,7 +418,7 @@ public class MainGameWindowController {
 
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainWindowPane.getScene().getWindow());
-        dialog.setTitle("Opcje");
+        dialog.setTitle("Scenariusz|Zasady|Pomoc");
         dialog.setHeaderText("Instrukcja && Zasady gry");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/Windows_fxml/RulesWindow.fxml"));
