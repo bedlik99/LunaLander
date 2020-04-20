@@ -23,10 +23,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Config config = JsonData.getConfig();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/MainGameWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Windows_fxml/MainGameWindow.fxml"));
         primaryStage.setTitle(config.getMainWindowTitle());
-        primaryStage.setScene(new Scene(root, config.getWindowWidth(), config.getWindowHeight()));
+        Scene mainScene = new Scene(root,config.getWindowWidth(),config.getWindowHeight());
+        primaryStage.setScene(mainScene);
         primaryStage.show();
+
+
 
     }
 
@@ -38,6 +41,9 @@ public class Main extends Application {
     public void init() throws Exception {
         JsonData.loadFile("configFile.json");
         JsonData.loadFile("levelModel1.json");
+        JsonData.loadFile("levelModel2.json");
+        JsonData.loadFile("levelModel3.json");
+
     }
 
     /**

@@ -12,5 +12,7 @@ module LunaLander {
     opens mainWindow;
     opens DataModelJSON;
     opens ConfigClasses.LevelModelClass;
+    opens mainWindow.Controllers;
+
 
 }

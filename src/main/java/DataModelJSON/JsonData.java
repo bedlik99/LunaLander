@@ -3,13 +3,6 @@ package DataModelJSON;
 // wczytanie Pliku konfiguracyjnego config.json podczas wlaczenia aplikacji
 // Musimy wypelnic stale zmienne, ktore potem beda uzywane przy implementacji innych komponentow
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
-
 import ConfigClasses.Config;
 import ConfigClasses.LevelModelClass.LevelModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,6 +13,13 @@ import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 /**
  * Klasa abstrakcyjna, będziemy wykorzystywać jej pola w różnych miejscach, ponieważ zawiera konfiguracyjne elementy projektu.
@@ -36,6 +36,8 @@ public abstract class JsonData {
      * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy statek.
      */
         private static Image spaceCraftImage = new Image("spaceCraft.png");
+
+
     /**
      * Obiekt klasy zawierającej główne zmienne konfiguracyjne - Rozmiary okna,punkty za poziom, nazwa okna itd.
      * Inicjalizacja pól tej zmiennej jest wykonywana przez wczytanie pliku konfiguracyjnego "do" tej klasy, wykorzystując
@@ -45,6 +47,8 @@ public abstract class JsonData {
      * @see Config
      */
     private static Config config;
+
+
     /**
      * Obiekt klasy zawierającej opis modelu poziomu pierwszego.Inicjalizacja pól odbywa się poprzez wczytanie zmiennych z pliku *.json
      * i parsowanie ich na obiekt klasy LevelModel1.
@@ -55,16 +59,22 @@ public abstract class JsonData {
      * @see LevelModel
      */
         private static LevelModel levelModel1,levelModel2,levelModel3;
+
+
     /**
      * Obiekt z pozwalający na wczytywanie specyficznego ułożenia danych w pliku *.json i mapowanie go na konkretny
      * Obiekt posiadający dane ułożenie i vice-versa.
      */
     private static ObjectMapper mapper = getDefaultObjectMapper();
+
+
     /**
      * Obiekt pozwalający na parsowanie wczytanego pliku na JSON obiekt - Jest to przejściowy etap potrzebny do poprawnego
      * przypisania danych wczytanych z pliku do konkretnego Obiektu.
      */
         private static JSONParser jsonParser = new JSONParser();
+
+
     /**
      * @return Obiekt klasy Config - obiekt zawierający zmienne konfiguracyjne
      * @see Config
@@ -72,11 +82,14 @@ public abstract class JsonData {
     public static Config getConfig() {
         return config;
     }
+
+
     /**
      * @return Obiekt klasy LevelModel - obiekt zawierający model planszy poziomu 1
      * @see LevelModel
      */
         public static LevelModel getLevelModel1() { return levelModel1; }
+
 
     /**
      * @return Obiekt klasy LevelModel - obiekt zawierający model planszy poziomu 2
@@ -86,6 +99,7 @@ public abstract class JsonData {
         return levelModel2;
     }
 
+
     /**
      * @return Obiekt klasy LevelModel - obiekt zawierający model planszy poziomu 3
      * @see LevelModel
@@ -93,6 +107,7 @@ public abstract class JsonData {
     public static LevelModel getLevelModel3() {
         return levelModel3;
     }
+
 
     /**
      * @return Zwraca Obiekt klasy image - obrazek.png statku kosmicznego, funkcja wywolywana podczas rysowania poziomu
@@ -109,6 +124,7 @@ public abstract class JsonData {
         return defaultObjectMapper;
     }
 
+
     /**
      * Funkcja przyjmująca na parametr skonwertowany na String'a obiekt typu JSONObject.
      * <p>Ten Obiekt klasy JSONObject to wczytany plik *.json i sparsowany na obiekt Jsonow'y.</p>
@@ -121,6 +137,8 @@ public abstract class JsonData {
     public static JsonNode readJson(String src) throws IOException {
         return mapper.readTree(src);
     }
+
+
 
     /**
      * Funkcja mapuje przysłany Obiekt klasy JsonNode i przy pomocy mappera, wyciąga z wartości i przypisuje je do zmiennych
@@ -140,20 +158,20 @@ public abstract class JsonData {
 //    }
 
     /**
-     * <p>Metoda wczytuje plik konfiguracyjny, wykorzystując funkcje parsowania pliku z *.jsona na klasę konfiguracyjną
+     * <p>Metoda wczytuje plik konfiguracyjny, wykorzystując funkcje parsowania pliku z pliku o formacie *.json na klasę konfiguracyjną
      *  i tym samym inicjalizuje atrybuty obiektu klasy konfiguracyjnej, tutaj: config,levelModel1 itd.</p>
      *
      *  Najpierw pobiera adres URL pliku konfiguracyjnego *.json. Dzięki ułożeniu struktury plików przez Maven'a,
      *  posiadamy folder "resources" w którym są pliki źródłowe- obrazki, plik.fxml(określający wygląd okna),pliki konfiguracyjne *.json
      *  Dzięki temu odwołujemy się funkcją .getResource("/nazwapliku.format"). Gdzie: "nazwapliku.format" to parametr metody - obiekt klasy String
      *
-     *  <p> Konstrukcja if-else ma za zadanie wybrać odpowiedni plik do wczytania i przypisać odpowiedniemu atrybutowi klasy JsonData (klasie konfiguracyjnej)
+     *  <p> Konstrukcja if-else ma za zadanie wybrać odpowiedni plik do wczytania i przypisać odpowiedniemu atrybutowi klasy JsonData (klasie konfiguracyjnej) -
      *   wartości wczytane z pliku </p>
      * @param fileName nazwa pliku(String), który będzie wczytany pisana z rozszerzeniem w formacie: nazwapliku.format
      */
     public static void loadFile(String fileName) {
         try {
-            URL res = JsonData.class.getResource("/" + fileName);
+            URL res = JsonData.class.getResource("/Files_json/" + fileName);
             File file = Paths.get(res.toURI()).toFile();
             String toLoadFile = file.getAbsolutePath();
 
@@ -166,8 +184,11 @@ public abstract class JsonData {
                     config = JsonData.fromJson(node, Config.class);
                 }else if(fileName.equals("levelModel1.json")){
                     levelModel1 = JsonData.fromJson(node, LevelModel.class);
+                }else if(fileName.equals("levelModel2.json")) {
+                    levelModel2 = JsonData.fromJson(node, LevelModel.class);
+                }else if(fileName.equals("levelModel3.json")) {
+                    levelModel3 = JsonData.fromJson(node, LevelModel.class);
                 }
-
         }  catch (IOException | ParseException | URISyntaxException ex) {
             ex.printStackTrace();
         }

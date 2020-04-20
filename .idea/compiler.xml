@@ -17,6 +17,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="LunaLander_app" />
+        <module name="proze20l_bedlinski_karp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -36,6 +37,7 @@
       <module name="maven-settings" target="1.7" />
       <module name="maven-settings-builder" target="1.7" />
       <module name="maven-slf4j-provider" target="1.7" />
+      <module name="proze20l_bedlinski_karp" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

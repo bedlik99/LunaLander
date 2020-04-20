@@ -15,6 +15,16 @@ import java.util.List;
  * Siła grawitacji, ilość żyć, ilość paliwa i podstawowe ilość punktów za przejście poziomu są jedynie zależne od poziomu trudności
  */
 public final class LevelModel {
+
+    /**
+     * Podstawowa szerokość statku kosmicznego.
+     */
+    private double basicSpaceCraftWidth;
+
+    /**
+     * Podstawowa szerokość powierzchni planety.
+     */
+    private double basicSurfaceWidth;
     /**
      * Podstawowa wysokość statku kosmicznego.
      */
@@ -26,7 +36,7 @@ public final class LevelModel {
     /**
      * Kontener - Lista punktów wierzchołków wielokąta opisującego statek kosmiczny
      */
-    private List<Double> spaceCraftPolygonPeakValues = new ArrayList<>();
+    private List<Double> spaceCraftPeakValues = new ArrayList<>();
     /**
      * Kontener - Lista przechowywująca wyglad - zmienne typy Double, wartości wierzchołków -
      * wielokąta opisującego wygląd powierzchni.
@@ -49,14 +59,29 @@ public final class LevelModel {
      * @see Polygon
      */
 
-    public void paint_example_level_surface(Polygon surfacePolygon,Polygon spaceCraftPolygon ){
+    public void paintLevel(Polygon surfacePolygon,Polygon spaceCraftPolygon ){
         surfacePolygon.setStroke(Color.MIDNIGHTBLUE);
         surfacePolygon.setFill(Color.GREY);
+
         surfacePolygon.getPoints().addAll(surfacePeakValues);
 
         spaceCraftPolygon.setFill(new ImagePattern(JsonData.getSpaceCraftImage()));
-        spaceCraftPolygon.getPoints().addAll(spaceCraftPolygonPeakValues);
+        spaceCraftPolygon.getPoints().addAll(spaceCraftPeakValues);
+    }
 
+
+    /**
+     * @return Wartość szerokości statku kosmicznego
+     */
+    public double getBasicSpaceCraftWidth() {
+        return basicSpaceCraftWidth;
+    }
+
+    /**
+     * @return Wartość szerokości powierzchni planety
+     */
+    public double getBasicSurfaceWidth() {
+        return basicSurfaceWidth;
     }
 
     /**
@@ -77,8 +102,8 @@ public final class LevelModel {
      * opisującego statek kosmiczny
      * @return Lista wartości o typie Double - wierzchołki wielokąta
      */
-    public List<Double> getSpaceCraftPolygonPeakValues() {
-        return spaceCraftPolygonPeakValues;
+    public List<Double> getSpaceCraftPeakValues() {
+        return spaceCraftPeakValues;
     }
 
     /**

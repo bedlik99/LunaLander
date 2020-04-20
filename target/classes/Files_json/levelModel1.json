@@ -1,7 +1,9 @@
 {
+  "basicSpaceCraftWidth":30.0,
+  "basicSurfaceWidth":744.0,
   "basicSpaceCraftHeight":50.0,
-  "basicSurfaceHeight":200.0,
-  "spaceCraftPolygonPeakValues": [
+  "basicSurfaceHeight":205.0,
+  "spaceCraftPeakValues": [
     0.0,50.0,15.0,0.0,30.0,50.0
   ],
   "surfacePeakValues": [
@@ -21,7 +23,7 @@
     500.0,-100.0,590.0,-100.0,590.0,0.0,
 
     590.0,-100.0,600.0,-110.0,610.0,-120.0,620.0,-130.0,630.0,-140.0,650.0,-135.0,
-    670.0,-125.0,680.0,-115.0, 714.0,-100.0, 714.0,0.0
+    670.0,-125.0,680.0,-115.0, 744.0,-100.0, 744.0,0.0
   ]
 
 }

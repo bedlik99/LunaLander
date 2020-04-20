@@ -4,12 +4,11 @@
   "windowHeight":700.0,
   "numberOfLevels":3,
   "level": {
-    "levelName": [
-      "1 Level",
-      "2 Level",
-      "3 Level"
+    "levelNames": [
+      "Level1",
+      "Level2",
+      "Level3"
     ],
-    "difficultyLevel": {
       "healthPoint": [
         6,
         3,
@@ -30,6 +29,6 @@
         200,
         300
       ]
-    }
+
   }
 }
