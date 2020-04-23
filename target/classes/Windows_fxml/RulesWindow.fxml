@@ -17,7 +17,7 @@
                 <Text text="Ogolne informacje:" style="-fx-font-weight: bold" />
                 <Text text="** Masz 3 poziomy do przejscia. Mozesz wybrac poziom trudnosci" />
                 <Text text="** Na przejscie wszystkich poziomow masz okreslona liczbe zyc." />
-                <Text text="** Latwy - 6, Sredni - 3, Trudny - 1" />
+                <Text text="** Latwy - 3, Sredni - 2, Trudny - 1" />
                 <Text text="Scenariusz:" style="-fx-font-weight: bold"/>
                 <Text text="*Sila grawitacji sciaga statek kosmiczny na powierzchnie planety..." />
                 <Text text="*Aby wyladowac prawidlowo nalezy wyladowac z odpowiednia predkoscia oraz na równym podlozu. " wrappingWidth="400" style="-fx-font-weight: bold" />

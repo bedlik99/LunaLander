@@ -7,8 +7,40 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaDoc/LunaLander/DataModelJSON/JsonData.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/LunaLander/DataModelJSON/JsonData.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaDoc/LunaLander/DataModelJSON/class-use/JsonData.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/LunaLander/DataModelJSON/class-use/JsonData.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LunaLanderMM.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proze20l_bedlinski_karp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/proze20l_bedlinski_karp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ConfigClasses/LevelModelClass/LevelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ConfigClasses/LevelModelClass/LevelModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataModelJSON/JsonData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainWindow/Controllers/StartGameWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainWindow/Controllers/StartGameWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mainWindow/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainWindow/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mainWindow/MainGameWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mainWindow/MainGameWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Files_json/configFile.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Files_json/levelModel1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Files_json/levelModel2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Files_json/levelModel3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows_fxml/MainGameWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows_fxml/MainGameWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows_fxml/RulesWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows_fxml/RulesWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ConfigClasses/LevelModelClass/LevelModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ConfigClasses/LevelModelClass/LevelModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DataModelJSON/JsonData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Files_json/configFile.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Files_json/levelModel1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Files_json/levelModel2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Files_json/levelModel3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Windows_fxml/MainGameWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Windows_fxml/MainGameWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Windows_fxml/RulesWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Windows_fxml/RulesWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/Controllers/StartGameWindowController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/Controllers/StartGameWindowController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/Controllers/StartGameWindowController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/Controllers/StartGameWindowController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/Controllers/StartGameWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/Controllers/StartGameWindowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainWindow/MainGameWindowController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +87,6 @@
     </breakpoint_any>
     <ui_properties converted="true" />
     <breakpoint_rules converted="true" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -217,25 +246,45 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="483" y="137" width="1084" height="678" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1587417912489" />
-    <state width="1807" height="138" key="GridCell.Tab.0.bottom" timestamp="1587426043437">
+    <state width="1807" height="186" key="GridCell.Tab.0.bottom" timestamp="1587669700186">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="138" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1587426043437" />
-    <state width="1807" height="138" key="GridCell.Tab.0.center" timestamp="1587426043436">
+    <state width="1807" height="186" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1587669700186" />
+    <state width="1807" height="186" key="GridCell.Tab.0.center" timestamp="1587669700186">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="138" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1587426043436" />
-    <state width="1807" height="138" key="GridCell.Tab.0.left" timestamp="1587426043436">
+    <state width="1807" height="186" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1587669700186" />
+    <state width="1807" height="186" key="GridCell.Tab.0.left" timestamp="1587669700185">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="138" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1587426043436" />
-    <state width="1807" height="138" key="GridCell.Tab.0.right" timestamp="1587426043436">
+    <state width="1807" height="186" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1587669700185" />
+    <state width="1807" height="186" key="GridCell.Tab.0.right" timestamp="1587669700186">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="138" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1587426043436" />
+    <state width="1807" height="186" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1587669700186" />
+    <state width="1807" height="332" key="GridCell.Tab.1.bottom" timestamp="1587511365950">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="332" key="GridCell.Tab.1.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1587511365950" />
+    <state width="1807" height="332" key="GridCell.Tab.1.center" timestamp="1587511365950">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="332" key="GridCell.Tab.1.center/67.27.1853.1053@67.27.1853.1053" timestamp="1587511365950" />
+    <state width="1807" height="332" key="GridCell.Tab.1.left" timestamp="1587511365949">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="332" key="GridCell.Tab.1.left/67.27.1853.1053@67.27.1853.1053" timestamp="1587511365949" />
+    <state width="1807" height="332" key="GridCell.Tab.1.right" timestamp="1587511365950">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="332" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1587511365950" />
     <state x="476" y="130" width="1024" height="845" key="SettingsEditor" timestamp="1587417887100">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="476" y="130" width="1024" height="845" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1587417887100" />
+    <state x="657" y="253" key="run.anything.popup" timestamp="1587498740164">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="657" y="253" key="run.anything.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1587498740164" />
   </component>
 </project>

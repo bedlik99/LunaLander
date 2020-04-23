@@ -10,8 +10,8 @@
       "Level3"
     ],
       "healthPoint": [
-        6,
         3,
+        2,
         1
       ],
       "gravityForce": [
@@ -25,9 +25,9 @@
         45
       ],
       "basicPointsForLevel": [
-        150,
-        200,
-        300
+        300,
+        500,
+        650
       ]
 
   }

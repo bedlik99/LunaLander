@@ -5,20 +5,23 @@ package DataModelJSON;
 
 import ConfigClasses.Config;
 import ConfigClasses.LevelModelClass.LevelModel;
+import ConfigClasses.Player;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -27,16 +30,18 @@ import java.nio.file.Paths;
  * Ze względu na wyżej zaznaczoną abstrakcyjność klasy wszystkie pola - atrybuty i metody będą statyczne, aby móc się do nich odwołać. Z modyfikatorem <code>static</code>
  *
  * <p>Ze względu na wyżej wymienione zasady działania klasy, w czasie działania projektu,
- *  będzie istnieć zawsze tylko jedno możliwe odwołanie(referencja) do klas konfiguracyjnych. Poprzez statyczne odwołanie do pola klasy JsonData</p>
+ * będzie istnieć zawsze tylko jedno możliwe odwołanie(referencja) do klas konfiguracyjnych. Poprzez statyczne odwołanie do pola klasy JsonData</p>
  */
-public abstract class JsonData {
+public abstract class Data {
 
     /**
      * Obiekt klasy Image, przechowywujący obiekt graficzny(zdjęcie.png) statku kosmicznego,
      * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy statek.
      */
-        private static Image spaceCraftImage = new Image("spaceCraft.png");
-
+    private final static Image spaceCraftImage = new Image("spaceCraft.png");
+    private final static Image spaceCraftDownFireImage = new Image("spaceCraftDownFire.png");
+    private final static Image spaceCraftLeftFireImage = new Image("spaceCraftLeftFire.png");
+    private final static Image spaceCraftRightFireImage = new Image("spaceCraftRightFire.png");
 
     /**
      * Obiekt klasy zawierającej główne zmienne konfiguracyjne - Rozmiary okna,punkty za poziom, nazwa okna itd.
@@ -44,6 +49,7 @@ public abstract class JsonData {
      * parsowanie pliku *.json jako obiekt klasy Config ( w tym przypadku)
      * Konstruktor klasy jest konstruktorem domyślnym - nie zawierającym inicjalizującego zmienne kodu.
      * <p> Jest to jedyna instancja klasy Config przedstawiająca wartości konfiguracyjne elementów programu</p>
+     *
      * @see Config
      */
     private static Config config;
@@ -56,9 +62,10 @@ public abstract class JsonData {
      * <p>Zmienne konfiguracyjne to wartości wierzchołków wielokątów opisujących powierzchnię planety i statek kosmiczny.</p>
      * Konstruktor klasy jest konstruktorem domyślnym - nie zawierającym inicjalizującego zmienne kodu.
      * <p>Jest to jedyna instancja klasy przedstawiającej model poziomu w całym programie</p>
+     *
      * @see LevelModel
      */
-        private static LevelModel levelModel1,levelModel2,levelModel3;
+    private static LevelModel levelModel1, levelModel2, levelModel3;
 
 
     /**
@@ -72,8 +79,27 @@ public abstract class JsonData {
      * Obiekt pozwalający na parsowanie wczytanego pliku na JSON obiekt - Jest to przejściowy etap potrzebny do poprawnego
      * przypisania danych wczytanych z pliku do konkretnego Obiektu.
      */
-        private static JSONParser jsonParser = new JSONParser();
+    private static JSONParser jsonParser = new JSONParser();
 
+    private static ObservableList<Player> listOfPlayers = FXCollections.observableArrayList();
+
+
+    public static Image getSpaceCraftDownFireImage() {
+        return spaceCraftDownFireImage;
+    }
+
+    public static Image getSpaceCraftLeftFireImage() {
+        return spaceCraftLeftFireImage;
+    }
+
+    public static Image getSpaceCraftRightFireImage() {
+        return spaceCraftRightFireImage;
+    }
+
+
+    public static ObservableList<Player> getListOfPlayers() {
+        return listOfPlayers;
+    }
 
     /**
      * @return Obiekt klasy Config - obiekt zawierający zmienne konfiguracyjne
@@ -88,7 +114,9 @@ public abstract class JsonData {
      * @return Obiekt klasy LevelModel - obiekt zawierający model planszy poziomu 1
      * @see LevelModel
      */
-        public static LevelModel getLevelModel1() { return levelModel1; }
+    public static LevelModel getLevelModel1() {
+        return levelModel1;
+    }
 
 
     /**
@@ -112,14 +140,16 @@ public abstract class JsonData {
     /**
      * @return Zwraca Obiekt klasy image - obrazek.png statku kosmicznego, funkcja wywolywana podczas rysowania poziomu
      */
-    public static Image getSpaceCraftImage() { return spaceCraftImage; }
+    public static Image getSpaceCraftImage() {
+        return spaceCraftImage;
+    }
 
     /**
      * @return Zwraca obiekt pozwalający na poprawne odczytywanie pliku *.json oraz zapisywanie do niego
      */
     private static ObjectMapper getDefaultObjectMapper() {
         ObjectMapper defaultObjectMapper = new ObjectMapper();
-        defaultObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false); // gdy chcemy dokladac wiecej elementow, a nie wiemy ile ich bedzie
+        defaultObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // gdy chcemy dokladac wiecej elementow, a nie wiemy ile ich bedzie
 
         return defaultObjectMapper;
     }
@@ -130,8 +160,9 @@ public abstract class JsonData {
      * <p>Ten Obiekt klasy JSONObject to wczytany plik *.json i sparsowany na obiekt Jsonow'y.</p>
      * Następnie przy pomocy mappera czyta i zwraca obiekt klasy JsonNode,
      * którego potem parsujemy na klasę przy pomocy funkcji fromJson i przypisujemy do odpowiedniej klasy.
+     *
      * @param src plik *.json po parsowaniu na obiekt klasy JSONObject skonwertowany na obiekt typu String
-     * @return  zwraca Obiekt klasy JsonNode, który będzie już bezpośrednio parsowany na Klasę Konfiguracyjną
+     * @return zwraca Obiekt klasy JsonNode, który będzie już bezpośrednio parsowany na Klasę Konfiguracyjną
      * @throws IOException Jeżeli coś się nie wczyta
      */
     public static JsonNode readJson(String src) throws IOException {
@@ -139,63 +170,133 @@ public abstract class JsonData {
     }
 
 
-
     /**
      * Funkcja mapuje przysłany Obiekt klasy JsonNode i przy pomocy mappera, wyciąga z wartości i przypisuje je do zmiennych
      * klasy danej w 2 parametrze. Zwraca obiekt klasy którą mapuje z obiektu JsonNode, na klasę konfiguracyjną.
-     * @param node Obiekt bezpośrednio mapowany na klasę konfiguracyjną
+     *
+     * @param node  Obiekt bezpośrednio mapowany na klasę konfiguracyjną
      * @param clazz Klasa konfiguracyjna na która mapujemy
-     * @param <A> Klasa konfiguracyjna np. Config, LevelModel1,LevelModel2,...
+     * @param <A>   Klasa konfiguracyjna np. Config, LevelModel1,LevelModel2,...
      * @return Zwraca obiekt Klasy, której przypisujemy wczytane dane
      * @throws JsonProcessingException Jeżeli przypisanie się nie powiodło
      */
     public static <A> A fromJson(JsonNode node, Class<A> clazz) throws JsonProcessingException {
-        return mapper.treeToValue(node,clazz);
+        return mapper.treeToValue(node, clazz);
     }
 
-//    public static JsonNode toJson(Object a) {
-//        return mapper.valueToTree(a);
-//    }
 
     /**
      * <p>Metoda wczytuje plik konfiguracyjny, wykorzystując funkcje parsowania pliku z pliku o formacie *.json na klasę konfiguracyjną
-     *  i tym samym inicjalizuje atrybuty obiektu klasy konfiguracyjnej, tutaj: config,levelModel1 itd.</p>
+     * i tym samym inicjalizuje atrybuty obiektu klasy konfiguracyjnej, tutaj: config,levelModel1 itd.</p>
+     * <p>
+     * Najpierw pobiera adres URL pliku konfiguracyjnego *.json. Dzięki ułożeniu struktury plików przez Maven'a,
+     * posiadamy folder "resources" w którym są pliki źródłowe- obrazki, plik.fxml(określający wygląd okna),pliki konfiguracyjne *.json
+     * Dzięki temu odwołujemy się funkcją .getResource("/nazwapliku.format"). Gdzie: "nazwapliku.format" to parametr metody - obiekt klasy String
      *
-     *  Najpierw pobiera adres URL pliku konfiguracyjnego *.json. Dzięki ułożeniu struktury plików przez Maven'a,
-     *  posiadamy folder "resources" w którym są pliki źródłowe- obrazki, plik.fxml(określający wygląd okna),pliki konfiguracyjne *.json
-     *  Dzięki temu odwołujemy się funkcją .getResource("/nazwapliku.format"). Gdzie: "nazwapliku.format" to parametr metody - obiekt klasy String
+     * <p> Konstrukcja if-else ma za zadanie wybrać odpowiedni plik do wczytania i przypisać odpowiedniemu atrybutowi klasy JsonData (klasie konfiguracyjnej) -
+     * wartości wczytane z pliku </p>
      *
-     *  <p> Konstrukcja if-else ma za zadanie wybrać odpowiedni plik do wczytania i przypisać odpowiedniemu atrybutowi klasy JsonData (klasie konfiguracyjnej) -
-     *   wartości wczytane z pliku </p>
      * @param fileName nazwa pliku(String), który będzie wczytany pisana z rozszerzeniem w formacie: nazwapliku.format
      */
     public static void loadFile(String fileName) {
         try {
-            URL res = JsonData.class.getResource("/Files_json/" + fileName);
+            URL res = Data.class.getResource("/ConfigFiles/" + fileName);
             File file = Paths.get(res.toURI()).toFile();
             String toLoadFile = file.getAbsolutePath();
 
-                FileReader jsonFile = new FileReader(toLoadFile);
-                JSONObject obj = (JSONObject) jsonParser.parse(jsonFile);
-                String jsonString = obj.toString();
-                JsonNode node = JsonData.readJson(jsonString);
+            FileReader jsonFile = new FileReader(toLoadFile);
+            JSONObject obj = (JSONObject) jsonParser.parse(jsonFile);
+            String jsonString = obj.toString();
+            JsonNode node = Data.readJson(jsonString);
 
-                if(fileName.equals("configFile.json")) {
-                    config = JsonData.fromJson(node, Config.class);
-                }else if(fileName.equals("levelModel1.json")){
-                    levelModel1 = JsonData.fromJson(node, LevelModel.class);
-                }else if(fileName.equals("levelModel2.json")) {
-                    levelModel2 = JsonData.fromJson(node, LevelModel.class);
-                }else if(fileName.equals("levelModel3.json")) {
-                    levelModel3 = JsonData.fromJson(node, LevelModel.class);
-                }
-        }  catch (IOException | ParseException | URISyntaxException ex) {
+            if (fileName.equals("configFile.json")) {
+                config = Data.fromJson(node, Config.class);
+            } else if (fileName.equals("levelModel1.json")) {
+                levelModel1 = Data.fromJson(node, LevelModel.class);
+            } else if (fileName.equals("levelModel2.json")) {
+                levelModel2 = Data.fromJson(node, LevelModel.class);
+            } else if (fileName.equals("levelModel3.json")) {
+                levelModel3 = Data.fromJson(node, LevelModel.class);
+            }
+        } catch (IOException | ParseException | URISyntaxException ex) {
             ex.printStackTrace();
         }
     }
 
-//        public static void savePlayerInfo(){
-//
-//        }
+    public static void loadResults(String fileName) throws IOException{
 
+
+        Path path =  Paths.get("src/main/resources/ConfigFiles/",fileName);
+        BufferedReader br = Files.newBufferedReader(path);
+
+        String input;
+        try{
+            while((input = br.readLine()) != null){
+                String [] itemPieces = input.split(" [|] ");
+
+                String nickName = itemPieces[0];
+                String scoreInString = itemPieces[1];
+                double scoreInDouble = Double.parseDouble(scoreInString);
+
+
+                Player ExPlayer = new Player(nickName,scoreInDouble);
+                listOfPlayers.add(ExPlayer);
+
+            }
+        }finally{
+            if(br != null){
+                br.close();
+            }
+        }
+    }
+
+
+    public static void saveResults(String fileName) throws IOException {
+
+        Path path = Paths.get("src/main/resources/ConfigFiles/",fileName);
+        BufferedWriter bw = Files.newBufferedWriter(path);
+        try{
+
+            for (Player item : listOfPlayers) {
+                bw.write(String.format("%s"+" | "+"%s",
+                        item.getNickName(),
+                        item.getGamingResult()));
+                bw.newLine();
+            }
+
+        }finally {
+            if(bw != null){
+                bw.close();
+            }
+        }
+
+
+
+/*
+        try(BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)){
+            writer.write("To be, or not to be. That is the question.");
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }*/
+
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

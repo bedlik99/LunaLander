@@ -21,20 +21,25 @@
     </columnConstraints>
 
     <HBox GridPane.columnIndex="0" spacing="10" style="-fx-border-color: navy; -fx-border-width: 2;">
-        <Label text="Predkosc Pozioma"  />
+        <Label text="Predkosc: "  />
+        <Label fx:id="speedAcceptance" text=" DOBRA lub ZLA  " style="-fx-text-fill: orange; -fx-font-weight: bold"  />
     </HBox>
 
-   <HBox GridPane.columnIndex="1" spacing="10" style="-fx-border-color: black; -fx-border-width: 2">
-       <Label text="Predkosc Pionowa"/>
-   </HBox>
+
+    <HBox GridPane.columnIndex="1" spacing="10" style="-fx-border-color: navy; -fx-border-width: 2">
+        <Label fx:id="fuelToUse" text="Ilosc paliwa" />
+        <ProgressBar fx:id="barOfFuel" progress="1" />
+    </HBox>
 
     <HBox GridPane.columnIndex="2" spacing="10" style="-fx-border-color: navy; -fx-border-width: 2">
-        <Label text="Ilosc paliwa" />
-        <ProgressBar fx:id="amountOfFuel" progress="0.75"/>
+        <Label text="Hp: " style="-fx-font-weight: bold"/>
+        <Label fx:id="healthPoints"  style="-fx-font-weight: bold" />
+
     </HBox>
 
     <HBox GridPane.columnIndex="3" spacing="10" style="-fx-border-color: black; -fx-border-width: 2">
-        <Label text="Czas" />
+        <Label text="Czas [s]: " />
+        <Label fx:id="durationOfPlay" text="0.0" style="-fx-font-weight: bold; -fx-text-fill: BLACK"/>
     </HBox>
 
 </GridPane>
@@ -53,9 +58,9 @@
                 <RowConstraints  percentHeight="16" />
             </rowConstraints>
 
-            <Button fx:id="startGameButton" text="START" GridPane.rowIndex="0" prefHeight="40" prefWidth="150" onMouseClicked="#showStartGameWindow"  GridPane.halignment="CENTER" />
-            <Button text="ZASADY" GridPane.rowIndex="1" prefHeight="40" prefWidth="150" onMouseClicked="#showOptionWindow"  GridPane.halignment="CENTER"/>
-            <Button text="TABELA WYNIKOW" GridPane.rowIndex="2" prefHeight="40" prefWidth="150" wrapText="true"  GridPane.halignment="CENTER"/>
+            <Button text="START" GridPane.rowIndex="0" prefHeight="40" prefWidth="150" onMouseClicked="#showStartGameWindow"  GridPane.halignment="CENTER" />
+            <Button text="ZASADY" GridPane.rowIndex="1" prefHeight="40" prefWidth="150" onMouseClicked="#showRulesWindow" GridPane.halignment="CENTER"/>
+            <Button text="TABELA WYNIKOW" GridPane.rowIndex="2" prefHeight="40" prefWidth="150" onMouseClicked="#showTableOfFame" wrapText="true"  GridPane.halignment="CENTER"/>
             <Button text="ZAKONCZ" GridPane.rowIndex="3" prefHeight="40" prefWidth="150"  onMouseClicked="#closeApplication"  GridPane.halignment="CENTER" />
             <Label text="'P' PAUZA" style="-fx-text-fill: goldenrod; -fx-font-size: 20px;
                 -fx-border-color: wheat; -fx-border-width:2"  GridPane.rowIndex="4" GridPane.halignment="CENTER" />

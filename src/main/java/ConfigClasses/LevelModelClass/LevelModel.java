@@ -1,6 +1,6 @@
 package ConfigClasses.LevelModelClass;
 
-import DataModelJSON.JsonData;
+import DataModelJSON.Data;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
@@ -60,12 +60,25 @@ public final class LevelModel {
      */
 
     public void paintLevel(Polygon surfacePolygon,Polygon spaceCraftPolygon ){
+
         surfacePolygon.setStroke(Color.MIDNIGHTBLUE);
         surfacePolygon.setFill(Color.GREY);
 
-        surfacePolygon.getPoints().addAll(surfacePeakValues);
-        spaceCraftPolygon.setFill(new ImagePattern(JsonData.getSpaceCraftImage()));
-        spaceCraftPolygon.getPoints().addAll(spaceCraftPeakValues);
+        if(surfacePolygon.getPoints().isEmpty()){
+            surfacePolygon.getPoints().addAll(surfacePeakValues);
+        }else{
+            surfacePolygon.getPoints().clear();
+            surfacePolygon.getPoints().addAll(surfacePeakValues);
+        }
+
+            spaceCraftPolygon.setFill(new ImagePattern(Data.getSpaceCraftImage()));
+            spaceCraftPolygon.getPoints().addAll(spaceCraftPeakValues);
+
+
+    }
+
+    public void clearLevel(Polygon surfacePolygon){
+        surfacePolygon.getPoints().clear();
     }
 
 

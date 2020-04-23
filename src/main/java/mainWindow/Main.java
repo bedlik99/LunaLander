@@ -1,6 +1,6 @@
 package mainWindow;
 
-import DataModelJSON.JsonData;
+import DataModelJSON.Data;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,15 +21,13 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Config config = JsonData.getConfig();
+        Config config = Data.getConfig();
 
         Parent root = FXMLLoader.load(getClass().getResource("/Windows_fxml/MainGameWindow.fxml"));
         primaryStage.setTitle(config.getMainWindowTitle());
         Scene mainScene = new Scene(root,config.getWindowWidth(),config.getWindowHeight());
         primaryStage.setScene(mainScene);
         primaryStage.show();
-
-
 
     }
 
@@ -39,10 +37,11 @@ public class Main extends Application {
      */
     @Override
     public void init() throws Exception {
-        JsonData.loadFile("configFile.json");
-        JsonData.loadFile("levelModel1.json");
-        JsonData.loadFile("levelModel2.json");
-        JsonData.loadFile("levelModel3.json");
+        Data.loadFile("configFile.json");
+        Data.loadFile("levelModel1.json");
+        Data.loadFile("levelModel2.json");
+        Data.loadFile("levelModel3.json");
+        Data.loadResults("playersResults.txt");
 
     }
 
@@ -52,7 +51,7 @@ public class Main extends Application {
      */
     @Override
     public void stop() throws Exception {
-        // JsonData.saveResults();
+         Data.saveResults("playersResults.txt");
     }
 
     /**

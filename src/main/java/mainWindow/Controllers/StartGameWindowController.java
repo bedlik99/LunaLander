@@ -16,43 +16,48 @@ public class StartGameWindowController {
     @FXML
     private CheckBox offlineCheckBox;
 
-   @FXML
-   private RadioButton easyDiff,mediumDiff,hardDiff;
+    @FXML
+    private RadioButton easyDiff, mediumDiff, hardDiff;
 
-   @FXML
-   private ToggleGroup diffLvLGroup;
+    @FXML
+    private ToggleGroup diffLvLGroup;
 
-    public void initialize(){
-           mediumDiff.fire();
+    private int difficultyId;
 
-           diffLvLGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-               @Override
-               public void changed(ObservableValue<? extends Toggle> observableValue, Toggle oldV, Toggle newV) {
-                   if(diffLvLGroup.getToggles().get(0) == newV){
-                       System.out.println("Latwy poziom trudnosci");
-                   }
-                   if(diffLvLGroup.getToggles().get(1) == newV){
-                       System.out.println("Sredni poziom trudnosci");
-                   }
-                   if(diffLvLGroup.getToggles().get(2) == newV){
-                       System.out.println("Trudny poziom trudnosci");
-                   }
-               }
-           });
+    public void initialize() {
+        mediumDiff.fire();
+        difficultyId = 1;
+
+        diffLvLGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle oldV, Toggle newV) {
+                if (diffLvLGroup.getToggles().get(0) == newV) {
+                    System.out.println("Latwy poziom trudnosci");
+                    difficultyId = 0;
+                }
+                if (diffLvLGroup.getToggles().get(1) == newV) {
+                    System.out.println("Sredni poziom trudnosci");
+                    difficultyId = 1;
+                }
+                if (diffLvLGroup.getToggles().get(2) == newV) {
+                    System.out.println("Trudny poziom trudnosci");
+                    difficultyId = 2;
+                }
+            }
+        });
 
         offlineCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldV, Boolean newV) {
-                if(newV){
+                if (newV) {
                     port.setDisable(true);
                     adressIP.setDisable(true);
-                }else{
+                } else {
                     port.setDisable(false);
                     adressIP.setDisable(false);
                 }
             }
         });
-
 
 
     }
@@ -62,23 +67,25 @@ public class StartGameWindowController {
         String portNumber = port.getText().trim();
         String numberIP = adressIP.getText().trim();
 
-        if(offlineCheckBox.isSelected()){
+        if (offlineCheckBox.isSelected()) {
             System.out.println("Grasz offline!");
-        }
-        else if (portNumber.isEmpty() && numberIP.isEmpty() ) {
+        } else if (portNumber.isEmpty() && numberIP.isEmpty()) {
             System.out.println("Nie podales danych hosta!");
-        } else if (!portNumber.isEmpty() && numberIP.isEmpty()){
+        } else if (!portNumber.isEmpty() && numberIP.isEmpty()) {
             System.out.println("Nie podano adresu IP!");
-        }else if(portNumber.isEmpty() ){
+        } else if (portNumber.isEmpty()) {
             System.out.println("Nie podano numeru portu!");
-        }else {
+        } else {
             System.out.println("Grasz online!");
             System.out.println("Numer portu: " + portNumber);
             System.out.println("Adres IP: " + numberIP);
         }
 
 
+    }
 
+    public int getDifficultyId() {
+        return difficultyId;
     }
 
     public TextField getPort() {
