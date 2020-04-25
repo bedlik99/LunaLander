@@ -1,7 +1,6 @@
 package ConfigClasses.LevelModelClass;
 
 import DataModelJSON.Data;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 
@@ -43,6 +42,16 @@ public final class LevelModel {
      */
     private List<Double> surfacePeakValues = new ArrayList<>();
 
+    /**
+     * Kontener - Lista przechowywujaca punkty lewej i prawej granicy planszy(maja takie same wymiary)
+     */
+    private List<Double> borderPeakValues = new ArrayList<>();
+
+    /**
+     * Kontener - Lista przechowywujaca punkty prawej granicy planszy
+     */
+    private List<Double> tankFuelPeakValues = new ArrayList<>();
+
 
     // tutaj mozliwe ze w przypadku wyglądu powierzchni planety - będziemy wysyłać do funkcji listę kształtów(Polygon)
     // i okaże się lepsze zapisanie każdemu wielokątowi oddzielnie wartości wieszkołków
@@ -56,31 +65,57 @@ public final class LevelModel {
      * jest zadeklarowana i zainicjalizowana w klasie <code>JsonData</code> </p>
      * @param surfacePolygon Wielokąt opisujący wygląd powierchni planety
      * @param spaceCraftPolygon Wielokąt opisujący wygląd statku kosmicznego
+     * @param leftBorderPolygon Wielokąt opisujący wygląd lewej granicy planszy
+     * @param rightBorderPolygon Wielokąt opisujący wygląd prawej granicy planszy
+     * @param tankFuelPolygon Wielokąt opisujący wygląd zbiornika z paliwem
      * @see Polygon
      */
+    public void paintLevel(Polygon surfacePolygon,Polygon spaceCraftPolygon,Polygon leftBorderPolygon, Polygon rightBorderPolygon, Polygon tankFuelPolygon ){
 
-    public void paintLevel(Polygon surfacePolygon,Polygon spaceCraftPolygon ){
+        //surfacePolygon.setStroke(Color.MIDNIGHTBLUE);
+        surfacePolygon.setFill(new ImagePattern(Data.getSurfaceImage()));
+        leftBorderPolygon.setFill(new ImagePattern(Data.getSurfaceImage()));
+        rightBorderPolygon.setFill(new ImagePattern(Data.getSurfaceImage()));
+        tankFuelPolygon.setFill(new ImagePattern(Data.getTankFuelImage()));
+        spaceCraftPolygon.setFill(new ImagePattern(Data.getSpaceCraftImage()));
 
-        surfacePolygon.setStroke(Color.MIDNIGHTBLUE);
-        surfacePolygon.setFill(Color.GREY);
 
+        tankFuelPolygon.getPoints().addAll(tankFuelPeakValues);
+        spaceCraftPolygon.getPoints().addAll(spaceCraftPeakValues);
+
+        if(leftBorderPolygon.getPoints().isEmpty()){
+            leftBorderPolygon.getPoints().addAll(borderPeakValues);
+
+        }else{
+            leftBorderPolygon.getPoints().clear();
+            leftBorderPolygon.getPoints().addAll(borderPeakValues);
+        }
+
+        if(rightBorderPolygon.getPoints().isEmpty()){
+            rightBorderPolygon.getPoints().addAll(borderPeakValues);
+
+        }else{
+            rightBorderPolygon.getPoints().clear();
+            rightBorderPolygon.getPoints().addAll(borderPeakValues);
+        }
+        
         if(surfacePolygon.getPoints().isEmpty()){
             surfacePolygon.getPoints().addAll(surfacePeakValues);
+
         }else{
             surfacePolygon.getPoints().clear();
             surfacePolygon.getPoints().addAll(surfacePeakValues);
         }
 
-            spaceCraftPolygon.setFill(new ImagePattern(Data.getSpaceCraftImage()));
-            spaceCraftPolygon.getPoints().addAll(spaceCraftPeakValues);
-
-
     }
 
-    public void clearLevel(Polygon surfacePolygon){
-        surfacePolygon.getPoints().clear();
-    }
 
+    /**
+     * @return Getter zwracajcy liste przechowywujaca punkty opisujace ksztalt wielokata, baku paliwa
+     */
+    public List<Double> getTankFuelPeakValues() {
+        return tankFuelPeakValues;
+    }
 
     /**
      * @return Wartość szerokości statku kosmicznego
@@ -127,7 +162,7 @@ public final class LevelModel {
         return surfacePeakValues;
     }
 
-
-
-
+    public List<Double> getBorderPeakValues() {
+        return borderPeakValues;
+    }
 }

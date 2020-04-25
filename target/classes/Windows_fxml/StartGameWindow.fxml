@@ -31,7 +31,6 @@
                 <TextField fx:id="adressIP" GridPane.rowIndex="1" />
             </VBox>
 
-
             <VBox GridPane.rowIndex="1" GridPane.columnSpan="2" spacing="15" prefHeight="150" style="-fx-border-color: black; -fx-border-width: 2" alignment="BASELINE_CENTER">
                 <Label text="Wybierz poziom trudnosci: "/>
                 <fx:define>

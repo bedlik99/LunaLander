@@ -16,13 +16,22 @@ public class StopWatch {
      * Zmienna przechowywująca wartość w którym czas zaczął być mierzony
      * w milisekundach
      */
-    private long start;
+    private double start = 0.0;
     /**
      * Zmienna przechowywująca wartość w którym czas przestał być mierzony
      * w milisekundach
      */
-    private long stop;
+    private double stop = 0.0;
 
+    /**
+     * Zmienna przechowywwujaca czas policzony do zatrzymania gry przez gracza
+     */
+    private double timeToPause = 0.0;
+
+    /**
+     * Lista przechowywujaca czasu przechodzenia kazdego poziomu.
+     * Zatem bedzie maksymalnie n-elementowa , Gdzie n to liczba poziomow.
+     */
     private List<Double> levelDurations = new ArrayList<>();
 
 
@@ -43,6 +52,9 @@ public class StopWatch {
         levelDurations.add(getResult());
     }
 
+    /**
+     * @return Zwraca liste czasow uzyskanych przez gracza podczas gry
+     */
     public List<Double> getLevelDurations() {
         return levelDurations;
     }
@@ -53,9 +65,36 @@ public class StopWatch {
      * @return wartość czasu między dwoma punktami czasowymi w sekundach
      */
     public double getResult(){
-        return (stop - start) / 1000.0;
+        return ( Math.round( (timeToPause + ((stop - start) / 1000.0)) *100.0)/100.0);
     }
 
+    /**
+     * Funkcja wyliczajaca czas do zatrzymania przez gracza gry.
+     */
+    public void stopCheckPoint(){
+        timeToPause = timeToPause+ ((double)System.currentTimeMillis() - start)/1000.0;
+    }
+
+    /**
+     * Funkcja resetujaca czas podczas gdy gracz gra. A konkretnie gdy rozbije statek. - Czas jest zerowany.
+     */
+    public void resetTimeToPause(){
+        timeToPause =0;
+    }
+
+    /**
+     * @return Zwraca wartosc double czasu rozpoczecia liczenia czasu
+     */
+    public double getStart() {
+        return start;
+    }
+
+    /**
+     * @return Zwraca wartosc double czasu zakonczenia liczenia czasu
+     */
+    public double getStop() {
+        return stop;
+    }
 
     /**
      * Nadpisana metoda, mozemy wywołać w strumieniu wyjścia bezpośrednio instancję klasy,

@@ -37,10 +37,10 @@ public class Main extends Application {
      */
     @Override
     public void init() throws Exception {
-        Data.loadFile("configFile.json");
-        Data.loadFile("levelModel1.json");
-        Data.loadFile("levelModel2.json");
-        Data.loadFile("levelModel3.json");
+        Data.loadSetupFile("configFile.json");
+        Data.loadSetupFile("levelModel1.json");
+        Data.loadSetupFile("levelModel2.json");
+        Data.loadSetupFile("levelModel3.json");
         Data.loadResults("playersResults.txt");
 
     }

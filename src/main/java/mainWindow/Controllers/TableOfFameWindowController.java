@@ -3,16 +3,20 @@ package mainWindow.Controllers;
 import ConfigClasses.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 
 public class TableOfFameWindowController {
 
     @FXML
-    private ListView<Player> listOfScores;
+    private  ListView<Player> listOfScores;
 
-    private String listItem;
-
-
-    public void setListOfScores(ListView<Player> listOfScores) {
-        this.listOfScores = listOfScores;
+    public void initialize(){
+        listOfScores.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
+
+    public  ListView<Player> getListOfScores() {
+        return listOfScores;
+    }
+
+
 }

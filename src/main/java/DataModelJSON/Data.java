@@ -39,9 +39,36 @@ public abstract class Data {
      * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy statek.
      */
     private final static Image spaceCraftImage = new Image("spaceCraft.png");
+    /**
+     * Obiekt klasy Image, przechowywujący obiekt graficzny(zdjęcie.png) statku kosmicznego gdy uzwany jest silnik u dolu statku,
+     * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy statek.
+     */
     private final static Image spaceCraftDownFireImage = new Image("spaceCraftDownFire.png");
+    /**
+     * Obiekt klasy Image, przechowywujący obiekt graficzny(zdjęcie.png) statku kosmicznego gdy uzwany jest silnik z lewej strony statku,
+     * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy statek.
+     */
     private final static Image spaceCraftLeftFireImage = new Image("spaceCraftLeftFire.png");
+    /**
+     * Obiekt klasy Image, przechowywujący obiekt graficzny(zdjęcie.png) statku kosmicznego gdy uzwany jest silnik z prawej strony statku,
+     * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy statek.
+     */
     private final static Image spaceCraftRightFireImage = new Image("spaceCraftRightFire.png");
+    /**
+     * Obiekt klasy Image, przechowywujący obiekt graficzny(zdjęcie.png) Wybuchu statku,
+     * Wykorzystywany w momencie niefortunnego zderzenia.
+     */
+    private final static Image explosionImage = new Image("explosion.png");
+    /**
+     * Obiekt klasy Image, przechowywujący obiekt graficzny(zdjęcie.png) powierzchni planety,
+     * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy powierzchnie.
+     */
+    private final static Image surfaceImage = new Image("surface.png");
+    /**
+     * Obiekt klasy Image, przechowywujący obiekt graficzny(zdjęcie.png) baku paliwa,
+     * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy  zbiornik paliwa.
+     */
+    private final static Image tankFuelImage = new Image("tankFuel.png");
 
     /**
      * Obiekt klasy zawierającej główne zmienne konfiguracyjne - Rozmiary okna,punkty za poziom, nazwa okna itd.
@@ -53,7 +80,6 @@ public abstract class Data {
      * @see Config
      */
     private static Config config;
-
 
     /**
      * Obiekt klasy zawierającej opis modelu poziomu pierwszego.Inicjalizacja pól odbywa się poprzez wczytanie zmiennych z pliku *.json
@@ -81,22 +107,67 @@ public abstract class Data {
      */
     private static JSONParser jsonParser = new JSONParser();
 
+    /**
+     * Kontener -Lista "pozwalajaca sie obserwowac" (Statyczna) to znaczy ze jezeli przypiszemy ja do innej listy w naszym przypadku
+     * FileteredList a potem SortedList, to gdy dolozymy element do Tej tutaj ObservableList listOfPlayer, nie musze nadpisywac
+     * Listy posortowanej - sama zauwazy za zaszla zmiana i doda element
+     */
     private static ObservableList<Player> listOfPlayers = FXCollections.observableArrayList();
 
+    /**
+     * Dodanie elementu do listy observable a tym samym do tablicy wynikow graczy
+     * @param player Gracz ktory chce zostac zapisany z wynikiem
+     */
+    public static void addToScoreTable(Player player){
+        listOfPlayers.add(player);
+    }
 
+    /**
+     * @return zwraca zmienna przechowywujaca zdjecie zbiornika paliwa
+     */
+    public static Image getTankFuelImage() {
+        return tankFuelImage;
+    }
+
+    /**
+     * @return zwraca zmienna przechowywujaca zdjecie powierzchni planety
+     */
+    public static Image getSurfaceImage() {
+        return surfaceImage;
+    }
+
+    /**
+     * @return zwraca zmienna przechowywujaca zdjecie wybuchu statku
+     */
+    public static Image getExplosionImage() {
+        return explosionImage;
+    }
+
+    /**
+     * @return zwraca zmienna przechowywujaca zdjecie statku gdy uzywany jest silnik u spodu statku
+     */
     public static Image getSpaceCraftDownFireImage() {
         return spaceCraftDownFireImage;
     }
 
+    /**
+     * @return zwraca zmienna przechowywujaca zdjecie statku gdy uzywany jest silnik z lewej strony statku
+     */
     public static Image getSpaceCraftLeftFireImage() {
         return spaceCraftLeftFireImage;
     }
 
+    /**
+     * @return zwraca zmienna przechowywujaca zdjecie statku gdy uzywany jest silnik z prawej strony statku
+     */
     public static Image getSpaceCraftRightFireImage() {
         return spaceCraftRightFireImage;
     }
 
 
+    /**
+     * @return Zwraca ObservableList, przechowywujaca dane graczy
+     */
     public static ObservableList<Player> getListOfPlayers() {
         return listOfPlayers;
     }
@@ -198,7 +269,7 @@ public abstract class Data {
      *
      * @param fileName nazwa pliku(String), który będzie wczytany pisana z rozszerzeniem w formacie: nazwapliku.format
      */
-    public static void loadFile(String fileName) {
+    public static void loadSetupFile(String fileName) {
         try {
             URL res = Data.class.getResource("/ConfigFiles/" + fileName);
             File file = Paths.get(res.toURI()).toFile();
@@ -223,64 +294,67 @@ public abstract class Data {
         }
     }
 
+
+    /**
+     * Metoda wczytujaca plik .txt, w ktorym sa zapisani gracze, a dokladniej ich nicki oraz odpowiednio wyniki.
+     * Podczas wczytywania lini - czyli danych jednego gracza - atrybuty sa zczytywane, tworzony jest gracz o takich atrybutach
+     * I ten gracz jest dodawany do Listy Observable - listy wszystkich graczy
+     * @param fileName Nazwa pliku tutaj jest to playersResults.txt
+     * @throws IOException Wyjatek wyrzuca sie jezeli nie znajdzie takiego pliku
+     */
     public static void loadResults(String fileName) throws IOException{
-
-
+        
         Path path =  Paths.get("src/main/resources/ConfigFiles/",fileName);
-        BufferedReader br = Files.newBufferedReader(path);
 
-        String input;
-        try{
-            while((input = br.readLine()) != null){
-                String [] itemPieces = input.split(" [|] ");
+        try (BufferedReader br = Files.newBufferedReader(path)) {
+            String input;
+            while ((input = br.readLine()) != null) {
+                String[] itemPieces = input.split(" [|] ");
 
                 String nickName = itemPieces[0];
-                String scoreInString = itemPieces[1];
-                double scoreInDouble = Double.parseDouble(scoreInString);
+                if (!nickName.trim().isEmpty()) {
+                    String scoreInString = itemPieces[1];
+                    double scoreInDouble = Double.parseDouble(scoreInString);
+
+                    Player ExPlayer = new Player(nickName, scoreInDouble);
+                    listOfPlayers.add(ExPlayer);
+                }
 
 
-                Player ExPlayer = new Player(nickName,scoreInDouble);
-                listOfPlayers.add(ExPlayer);
-
-            }
-        }finally{
-            if(br != null){
-                br.close();
             }
         }
     }
 
 
+    /**
+     * Funkcja zapisujaca wyniki do pliku .txt. Wyniki sa brane z listy Observable, ktora zawiera wszystkich graczy.
+     * Lista Observable - listOfPlayers jest zawsze uzupelniana podczas wlaczania gry i potem sa ewentualnie dopisywani gracze
+     * @param fileName nazwa pliku tutaj - playersResults.txt
+     * @throws IOException Wyjatek jest rzucany jezeli nie udalo sie otworzyc pliku
+     */
     public static void saveResults(String fileName) throws IOException {
 
         Path path = Paths.get("src/main/resources/ConfigFiles/",fileName);
-        BufferedWriter bw = Files.newBufferedWriter(path);
-        try{
 
+        try (BufferedWriter bw = Files.newBufferedWriter(path)) {
+            int i = 1;
             for (Player item : listOfPlayers) {
-                bw.write(String.format("%s"+" | "+"%s",
+                bw.write(String.format("%s" + " | " + "%s",
                         item.getNickName(),
                         item.getGamingResult()));
-                bw.newLine();
+
+                if (i != listOfPlayers.size()) {
+                    bw.newLine();
+                }
+                i++;
             }
 
-        }finally {
-            if(bw != null){
-                bw.close();
-            }
         }
 
-
-
-/*
-        try(BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)){
-            writer.write("To be, or not to be. That is the question.");
-        }catch(IOException ex){
-            ex.printStackTrace();
-        }*/
-
-
     }
+    
+    
+    
 }
 
 

@@ -25,13 +25,13 @@ public final class Level {
      * Kontener - Lista przechowywująca zmienne typu Float - wartości sił grawitacji, które ściągają statek.
      * Utalone dla konkretnych poziomach trudności
      */
-    private  List<Float> gravityForce = new ArrayList<>();
+    private  List<Double> gravityForce = new ArrayList<>();
 
 
     /**
      * Kontener - Lista przechowywująca zmienne typu Long - Ilość paliwa zależna od poziomu trudności
      */
-    private  List<Long> amountOfFuel = new ArrayList<>();
+    private  List<Double> amountOfFuel = new ArrayList<>();
 
 
     /**
@@ -53,7 +53,7 @@ public final class Level {
      * @return Zwraca listę elementów typu Float - zawierającą siły grawitacji działającą na statek,
      * na konkretnym: łatwym/średnim/trudnym poziomie trudności
      */
-    public List<Float> getGravityForce() {
+    public List<Double> getGravityForce() {
         return gravityForce;
     }
 
@@ -62,7 +62,7 @@ public final class Level {
      * @return Zwraca listę elementów typu Long - zawierającą ilości paliwa, dane na przejscie poziomu
      * na konkretnym: łatwym/średnim/trudnym poziomie trudności
      */
-    public List<Long> getAmountOfFuel() {
+    public List<Double> getAmountOfFuel() {
         return amountOfFuel;
     }
 
@@ -76,6 +76,9 @@ public final class Level {
     }
 
 
+    /**
+     * @return Zmienna zwracajaca liste nazw Poziomow
+     */
     public List<String> getLevelNames() {
         return levelNames;
     }

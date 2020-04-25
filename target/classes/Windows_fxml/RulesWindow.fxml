@@ -17,11 +17,11 @@
                 <Text text="Ogolne informacje:" style="-fx-font-weight: bold" />
                 <Text text="** Masz 3 poziomy do przejscia. Mozesz wybrac poziom trudnosci" />
                 <Text text="** Na przejscie wszystkich poziomow masz okreslona liczbe zyc." />
-                <Text text="** Latwy - 3, Sredni - 2, Trudny - 1" />
+                <Text text="** Latwy - 3, Sredni - 2, Trudny - 2" />
                 <Text text="Scenariusz:" style="-fx-font-weight: bold"/>
                 <Text text="*Sila grawitacji sciaga statek kosmiczny na powierzchnie planety..." />
                 <Text text="*Aby wyladowac prawidlowo nalezy wyladowac z odpowiednia predkoscia oraz na równym podlozu. " wrappingWidth="400" style="-fx-font-weight: bold" />
-                <Text text="*Obserwuj predkosc statku ORAZ szukaj rownego podloza do wyladowania aby nie rozbic statku!" wrappingWidth="400"  />
+                <Text text="*Obserwuj predkosc statku,ilosc paliwa ORAZ szukaj rownego podloza do wyladowania aby nie rozbic statku!" wrappingWidth="400"  />
             </VBox>
 
             <VBox GridPane.columnIndex="1" spacing="30" alignment="CENTER" style="-fx-border-color: navy; -fx-border-width: 2">
