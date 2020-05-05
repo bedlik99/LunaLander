@@ -22,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
@@ -89,6 +90,9 @@ public class MainGameWindowController {
     @FXML
     private Label healthPoints;
 
+    @FXML
+    private Label labelPoints;
+
     /**
      * Zmienna 'przycisk' ktorego dzialanie pozwala na wyswietlenie okna do rozpoczecia nowej gry
      */
@@ -139,6 +143,13 @@ public class MainGameWindowController {
      */
     private Polygon rightBorderPolygon = new Polygon();
 
+
+
+    /**
+     * Wielokat opisujac ksztalt gwiazdy
+     */
+    private Polygon starPolygon = new Polygon();
+
     /**
      * Wielokat opisujac ksztalt plywajacego baku z paliwem
      */
@@ -182,11 +193,17 @@ public class MainGameWindowController {
      */
     private final TranslateTransition fuelTankTransition = new TranslateTransition();
 
+    private final ScaleTransition starScaleTransition = new ScaleTransition();
+
     /**
      * Zmienna obiektowa klasy Stopwatch pozwalajaca na zmierzenie czasu przejscia danego poziomu
      */
     private StopWatch stopWatch;
 
+    /**
+     * Zmienna klasy Shape pozwalajaca na detekcje kolizji statku z gwiazda
+     */
+    private Shape intersectWithStar;
     /**
      * Zmienna klasy Shape pozwalajaca na detekcje kolizji statku z powierzchnia planety
      */
@@ -270,6 +287,9 @@ public class MainGameWindowController {
      * Zmienna przechowujaca statyczna zmienna przechowywujaca flage na moment w programie w ktorym gra zostala zapauzowana
      */
     private static boolean pauseWasMade = false;
+
+    private static boolean tankFuelWasTaken = false;
+    private static boolean starWasTaken = false;
     /**
      * Zmienna przechowujaca statyczna zmienna przechowywujaca flage na moment w programie w ktorym gracz opuscil
      * z planety zamiast na niej wyladowac
@@ -303,6 +323,7 @@ public class MainGameWindowController {
     private SortedList<Player> sortedList;
 
 
+
     /**
      * Potezna Funkcja Inicjalizujaca.
      * Wywoluje sie sama!!!
@@ -323,6 +344,7 @@ public class MainGameWindowController {
 
         gamePaneHBox.getChildren().add(spaceCraftPolygon);
         gamePaneLeftBorderBox.getChildren().add(leftBorderPolygon);
+        gamePaneHBox.getChildren().add(starPolygon);
         gamePaneRightBorderBox.getChildren().add(rightBorderPolygon);
         gamePane.setBottom(surfaceShapePolygon);
         gamePane.setCenter(tankFuelPolygon);
@@ -346,7 +368,6 @@ public class MainGameWindowController {
             }
         });
 
-        // KRAZACY POJEMNIK PALIWA
 
         gravitationTransition.statusProperty().addListener(new ChangeListener<Animation.Status>() {
             @Override
@@ -372,7 +393,7 @@ public class MainGameWindowController {
                 actualFuel = Math.abs((double) Math.round((double) newF * 100.0) / 100.0);
 
                 if (actualFuel == 0.00) {
-                    fuelToUse.setText("BRAK PALIWA!");
+                    fuelToUse.setText("PUSTY BAK");
                     fuelToUse.setTextFill(Paint.valueOf("RED"));
                 }
             }
@@ -468,7 +489,7 @@ public class MainGameWindowController {
 
                     }
 
-                    if (keyEvent.getCode().equals(KeyCode.A) && gravitationTransition.getStatus() == Animation.Status.RUNNING) {
+                    if (keyEvent.getCode().equals(KeyCode.D) && gravitationTransition.getStatus() == Animation.Status.RUNNING) {
 
                         if (!isDestroyed && fuel > 0 && gravitationTransition.getStatus() != Animation.Status.PAUSED) {
                             accelerateToRight(leftRightCoefficient);
@@ -477,7 +498,7 @@ public class MainGameWindowController {
 
                     }
 
-                    if (keyEvent.getCode().equals(KeyCode.D) && gravitationTransition.getStatus() == Animation.Status.RUNNING) {
+                    if (keyEvent.getCode().equals(KeyCode.A) && gravitationTransition.getStatus() == Animation.Status.RUNNING) {
 
                         if (!isDestroyed && fuel > 0 && gravitationTransition.getStatus() != Animation.Status.PAUSED) {
                             accelerateToLeft(leftRightCoefficient);
@@ -533,7 +554,33 @@ public class MainGameWindowController {
         });
 
 
-    } //initialize method
+    } //end of initialize method
+
+
+    public void animateStar(Polygon starPolygon){
+        if (starScaleTransition.getStatus() == Animation.Status.STOPPED || starScaleTransition.getStatus() == Animation.Status.PAUSED ) {
+
+
+            if(levelToLoad == 1){
+                starPolygon.setTranslateY(200);
+            }else if(levelToLoad == 2){
+                starPolygon.setTranslateY(150);
+                starPolygon.setTranslateX(200);
+            }else if(levelToLoad == 3){
+                starPolygon.setTranslateY(190);
+                starPolygon.setTranslateX(-140);
+            }
+
+            starScaleTransition.setDuration(Duration.seconds(0.9));
+            starScaleTransition.setToX(1.35);
+            starScaleTransition.setToY(1.35);
+            starScaleTransition.setCycleCount(Animation.INDEFINITE);
+            starScaleTransition.setAutoReverse(true);
+            starScaleTransition.setNode(starPolygon);
+            starScaleTransition.play();
+
+        }
+    }
 
     /**
      * Funkcja, tworzaca animacje poruszania sie zbiorniku z paliwem
@@ -542,6 +589,8 @@ public class MainGameWindowController {
     public void animateTankFuel(Polygon tankFuelPolygon) {
 
         if (fuelTankTransition.getStatus() == Animation.Status.STOPPED || fuelTankTransition.getStatus() == Animation.Status.PAUSED ) {
+            tankFuelPolygon.setTranslateX(-300);
+            tankFuelPolygon.setTranslateY(-150);
 
             fuelTankTransition.setDuration(Duration.seconds(4));
             fuelTankTransition.setToX(300);
@@ -554,6 +603,7 @@ public class MainGameWindowController {
         }
 
     }
+
 
     /**
      * Funkcja "obezwladniajaca" dzialanie przyciskow w pewnych momentach. Podczas grania przez gracza.
@@ -596,7 +646,14 @@ public class MainGameWindowController {
             spaceCraftPolygon.setTranslateX(basicSpaceCraftWidth * ratioMoreThan1 / 2 - basicSpaceCraftWidth / 2);
 
             tankFuelPolygon.setScaleX(ratioMoreThan1);
-            tankFuelPolygon.setTranslateX(30.0 * ratioMoreThan1 / 2 - 30.0 / 2);
+            tankFuelPolygon.setTranslateX(-300*ratioMoreThan1);
+
+             if(levelToLoad == 2){
+                starPolygon.setTranslateX(200*ratioMoreThan1);
+            }else if(levelToLoad == 3){
+                starPolygon.setTranslateX(-140*ratioMoreThan1);
+            }
+
 
             playerTransition.setRate(ratioMoreThan1);
             leftRightCoefficient = (ratioMoreThan1 * 2.8);
@@ -625,7 +682,13 @@ public class MainGameWindowController {
             spaceCraftPolygon.setTranslateX((basicSpaceCraftWidth / 2 - (basicSpaceCraftWidth / 2) * ratioLessThan1) * (-1));
 
             tankFuelPolygon.setScaleX(ratioLessThan1);
-            tankFuelPolygon.setTranslateX((30.0 / 2 - (30.0 / 2) * ratioLessThan1) * (-1));
+            tankFuelPolygon.setTranslateX(-300*ratioLessThan1);
+
+            if(levelToLoad == 2){
+                starPolygon.setTranslateX(200*ratioLessThan1);
+            }else if(levelToLoad == 3){
+                starPolygon.setTranslateX(-140*ratioLessThan1);
+            }
 
             playerTransition.setRate(ratioLessThan1);
 
@@ -661,7 +724,16 @@ public class MainGameWindowController {
             rightBorderPolygon.setTranslateY((500.0 / 2 - (500.0 / 2) * ratioMoreThan1) * (-1));
 
             tankFuelPolygon.setScaleY(ratioMoreThan1);
-            tankFuelPolygon.setTranslateY((30.0 / 2 - (30.0 / 2) * ratioMoreThan1) * (-1));
+            tankFuelPolygon.setTranslateY(-150*ratioMoreThan1);
+
+
+            if(levelToLoad == 1){
+                starPolygon.setTranslateY(200*ratioMoreThan1);
+            }else if(levelToLoad == 2){
+                starPolygon.setTranslateY(150*ratioMoreThan1);
+            }else if(levelToLoad == 3){
+                starPolygon.setTranslateY(190*ratioMoreThan1);
+            }
 
             if (gravitationTransition.getStatus() == Animation.Status.RUNNING || gravitationTransition.getStatus() == Animation.Status.PAUSED) {
                 gravitationTransition.stop();
@@ -675,6 +747,8 @@ public class MainGameWindowController {
                 fuelTankTransition.play();
             }
 
+
+
         } else {
 
             //  System.out.println("Zmniejszam okno");
@@ -686,8 +760,15 @@ public class MainGameWindowController {
             spaceCraftPolygon.setTranslateY((basicSpaceCraftHeight * ratioLessThan1 / 2 - basicSpaceCraftHeight / 2));
 
             tankFuelPolygon.setScaleY(ratioLessThan1);
-            tankFuelPolygon.setTranslateY((30.0 * ratioLessThan1 / 2 - 30.0 / 2) * (-1));
+            tankFuelPolygon.setTranslateY(-150*ratioLessThan1);
 
+            if(levelToLoad == 1){
+                starPolygon.setTranslateY(200*ratioLessThan1);
+            }else if(levelToLoad == 2){
+                starPolygon.setTranslateY(150*ratioLessThan1);
+            }else if(levelToLoad == 3){
+                starPolygon.setTranslateY(190*ratioLessThan1);
+            }
 
             if (gravitationTransition.getStatus() == Animation.Status.RUNNING || gravitationTransition.getStatus() == Animation.Status.PAUSED) {
                 gravitationTransition.stop();
@@ -717,7 +798,6 @@ public class MainGameWindowController {
             gravitationTransition.setDelay(Duration.seconds(0.5));
             gravitationTransition.setDuration(Duration.seconds(levelsDetails.getGravityForce().get(difficultyId))); // w jakim czasie ma opasc statek - zmienna konfiguracyjna (grawitacja)
             gravitationTransition.setToY(515); // 512.8 Na do jakiego miejsca ma spasc - dopoki nie uderzy w ziemie! - Piękna funkcja!
-            //gravitationTransition.setCycleCount(Animation.INDEFINITE);  // musi zostac zastopowana
             gravitationTransition.setNode(spaceCraft);
             gravitationTransition.play();
 
@@ -726,8 +806,9 @@ public class MainGameWindowController {
                 public void handle(ActionEvent actionEvent) {
                     if (spaceCraft.getTranslateY() < 50) {
                         leftPlanet = true;
-                        // System.out.println("Wyleciales z planety!");
+                        //System.out.println("Wyleciales z planety!");
                         gravitationTransition.stop();
+                        fuelTankTransition.stop();
 
                         if (gamePaneHBox.getChildren().size() != 0) {
                             gamePaneHBox.getChildren().removeAll(spaceCraftPolygon);
@@ -736,7 +817,6 @@ public class MainGameWindowController {
                         gamePaneHBox.getChildren().add(spaceCraftPolygon);
 
                     }
-
                     if (gravitationTransition.getRate() <= 0.5 && !leftPlanet) {
                         //System.out.println("Gratulacje, wylądowales dobrze!");
 
@@ -749,8 +829,9 @@ public class MainGameWindowController {
                         double pointsForLevel = Data.getConfig().getLevel().getBasicPointsForLevel().get(difficultyId);
                         double pointsForFuelLeft = Math.ceil(fuel * 250);
                         double factorForTime = Math.floor(stopWatch.getLevelDurations().get(levelToLoad - 1) / 4); // nie da sie w 4 sekundy przejsc wiec nie ma problemu
-                        double totalResult = Math.ceil((pointsForLevel + pointsForFuelLeft) / factorForTime);
+                        double totalResult = Math.ceil((pointsForLevel + pointsForFuelLeft) - factorForTime*20);
                         player.setGamingResult(totalResult);
+                        labelPoints.setText(""+player.getGamingResult());
 
                         levelToLoad++;
                         fuelTankTransition.stop();
@@ -760,16 +841,12 @@ public class MainGameWindowController {
                         }
 
                         if (levelToLoad == 4) {
-//                            for(double time: stopWatch.getLevelDurations()){
-//                                System.out.println(time);
-//                            }
                             enableButtons();
                             showSaveResultsWindow();
                         }
 
                     } else {
-                        enableButtons();
-                        showSaveResultsWindow();
+                        animateExplosion();
                     }
 
                 }
@@ -808,9 +885,9 @@ public class MainGameWindowController {
             playerTransition.setNode(spaceCraftPolygon);
             playerTransition.play();
 
-            useFuel();
-        }
 
+        }
+        useFuel();
     }
 
     /**
@@ -825,8 +902,9 @@ public class MainGameWindowController {
             playerTransition.setNode(spaceCraftPolygon);
             playerTransition.play();
 
-            useFuel();
+
         }
+        useFuel();
 
     }
 
@@ -839,11 +917,11 @@ public class MainGameWindowController {
 
             if (gravitationTransition.getStatus() == Animation.Status.RUNNING) {
                 if (rate > 0) {
-                    rate = rate - 0.03;
+                    rate = rate - 0.035;
                     gravitationTransition.setRate(rate);
                     useFuel();
                 } else if (rate <= 0 && rate > -0.15) {
-                    rate = rate - 0.01;
+                    rate = rate - 0.02;
                     gravitationTransition.setRate(rate);
                     useFuel();
                 } else if (rate <= -0.15 && rate >= -1) {
@@ -912,34 +990,28 @@ public class MainGameWindowController {
 
         if (gamePaneHBox.getChildren().size() != 0) {
             this.gamePaneHBox.getChildren().removeAll(spaceCraftPolygon);
+            this.gamePaneHBox.getChildren().removeAll(starPolygon);
             this.gamePane.getChildren().removeAll(tankFuelPolygon);
 
         }
 
+        this.starPolygon = new Polygon();
+        this.gamePaneHBox.getChildren().add(starPolygon);
+
         this.spaceCraftPolygon = new Polygon();
         this.gamePaneHBox.getChildren().add(spaceCraftPolygon);
+
         this.tankFuelPolygon = new Polygon();
         this.gamePane.setCenter(tankFuelPolygon);
 
         if (levelNumber == 1) {
-            this.levelModel1.paintLevel(surfaceShapePolygon, spaceCraftPolygon, leftBorderPolygon, rightBorderPolygon, tankFuelPolygon);
+            this.levelModel1.paintLevel(surfaceShapePolygon, spaceCraftPolygon, leftBorderPolygon, rightBorderPolygon, tankFuelPolygon, starPolygon);
         } else if (levelNumber == 2) {
-            this.levelModel2.paintLevel(surfaceShapePolygon, spaceCraftPolygon, leftBorderPolygon, rightBorderPolygon, tankFuelPolygon);
+            this.levelModel2.paintLevel(surfaceShapePolygon, spaceCraftPolygon, leftBorderPolygon, rightBorderPolygon, tankFuelPolygon, starPolygon);
         } else if (levelNumber == 3) {
-            this.levelModel3.paintLevel(surfaceShapePolygon, spaceCraftPolygon, leftBorderPolygon, rightBorderPolygon, tankFuelPolygon);
+            this.levelModel3.paintLevel(surfaceShapePolygon, spaceCraftPolygon, leftBorderPolygon, rightBorderPolygon, tankFuelPolygon, starPolygon);
         }
 
-
-        fuel = 1;
-        pauseWasMade = false;
-        disableButtons();
-        tankFuelPolygon.setTranslateX(-280);
-        tankFuelPolygon.setTranslateY(-120);
-
-        barOfFuel.setProgress(fuel);
-        fuelToUse.setText("Ilosc paliwa");
-        fuelToUse.setTextFill(Paint.valueOf("Black"));
-        stopWatch.resetTimeToPause();
 
         if (spaceCraftPolygon.getPoints().size() != 0 && leftBorderPolygon.getPoints().size() != 0
                 && rightBorderPolygon.getPoints().size() != 0 && tankFuelPolygon.getPoints().size() != 0) {
@@ -952,6 +1024,7 @@ public class MainGameWindowController {
 
                     if (spaceCraftPolygon != null) {
 
+                        intersectWithStar = Shape.intersect(spaceCraftPolygon,starPolygon);
                         intersectWithTankFuel = Shape.intersect(spaceCraftPolygon,tankFuelPolygon);
                         intersectWithSurface = Shape.intersect(spaceCraftPolygon, surfaceShapePolygon);
                         intersectWithRightBorder = Shape.intersect(spaceCraftPolygon, rightBorderPolygon);
@@ -962,14 +1035,25 @@ public class MainGameWindowController {
                         acceptableValue = Math.abs(predictedFinish - finish);
                         finishSpeed = gravitationTransition.getRate();
 
+                        if(intersectWithStar.getBoundsInLocal().getWidth() > -1) {
 
-                        if(intersectWithTankFuel.getBoundsInLocal().getWidth() > -1
-                                || intersectWithTankFuel.getBoundsInLocal().getHeight() > -1) {
+                            if(!starWasTaken && gravitationTransition.getStatus() == Animation.Status.RUNNING){
+                                player.setGamingResult(300.0*((difficultyId+1)*0.5));
+                                labelPoints.setText(""+player.getGamingResult());
+                                starScaleTransition.stop();
+                                starPolygon.setFill(new ImagePattern(Data.getStarImageEmpty()));
+                                starWasTaken = true;
+                            }
 
-                            if(gamePane.getChildren().size() == 5){
-                                fuel = fuel +0.25;
+                        }
+
+                        if(intersectWithTankFuel.getBoundsInLocal().getWidth() > -1) {
+
+                            if(!tankFuelWasTaken && gravitationTransition.getStatus() == Animation.Status.RUNNING){
+                                fuel = fuel +0.20;
                                 barOfFuel.setProgress(fuel);
                                 gamePane.getChildren().removeAll(tankFuelPolygon);
+                                tankFuelWasTaken = true;
                             }
 
 
@@ -978,25 +1062,16 @@ public class MainGameWindowController {
                         if (intersectWithSurface.getBoundsInLocal().getWidth() > -1
                                 || intersectWithRightBorder.getBoundsInLocal().getWidth() > -1
                                 || intersectWithLeftBorder.getBoundsInLocal().getWidth() > -1) {
+
                             //System.out.println("Kolizja");
                             if (acceptableValue >= 13.0 || finishSpeed > 0.5) {
                                 //System.out.println("Rozbiles się! :(");
                                 gravitationTransition.stop();
                                 fuelTankTransition.stop();
 
-                                Platform.runLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        animateExplosion();
-                                    }
-                                });
-
+                                animateExplosion();
 
                             }
-
-                        } else {
-                            // Brak Kolizji - tutaj mozna wrzucic kod sprawdzajacy czy czlowiek "nie wylecial" statkiem poza plansze
-                            // ale jest to raczej radzenie sobie z bugiem - nie przeszkadza w grze.
 
                         }
 
@@ -1027,17 +1102,30 @@ public class MainGameWindowController {
         });
 
 
+        pauseWasMade = false;
+        tankFuelWasTaken = false;
+        starWasTaken = false;
+        disableButtons();
+        fuel = 1.0;
+        barOfFuel.setProgress(fuel);
+        speedAcceptance.setText("ZLA");
+        fuelToUse.setText("Paliwo");
+        fuelToUse.setTextFill(Paint.valueOf("Black"));
+        stopWatch.resetTimeToPause();
 
+
+        animateStar(starPolygon);
         animateTankFuel(tankFuelPolygon);
         animateGravitation(spaceCraftPolygon);
+        leftPlanet = false;
         isDestroyed = false;
         rate = 1;
         gravitationTransition.setRate(rate);
+        stopWatch.start();
+
 
         widthGamePaneScaling(newWidthValue);
         heightGamePaneScaling(newHeightValue);
-        stopWatch.start();
-
     }
 
 
@@ -1088,7 +1176,6 @@ public class MainGameWindowController {
                         System.out.println("Nie podales nicku - wynik nie zapisany");
                     } else {
                         Data.addToScoreTable(player);
-                        //System.out.println("Nick: " + player.getNickName() + "\nWynik: " + player.getGamingResult());
                     }
 
                 }
@@ -1132,7 +1219,7 @@ public class MainGameWindowController {
             return;
         }
 
-        // MULTITHREADING - OKNO OTWIERAM NA INNYM WATKU
+        // MULTITHREADING - OKNO OTWIERANE NA INNYM WATKU
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -1145,7 +1232,7 @@ public class MainGameWindowController {
 
                 if (result.isPresent() && result.get() == ButtonType.APPLY) {
                     leftPlanet = false;
-
+                    labelPoints.setText("0");
                     healthPoints.setText("" + levelsDetails.getHealthPoint().get(controller.getDifficultyId()));
                     healthP = levelsDetails.getHealthPoint().get(controller.getDifficultyId());
                     difficultyId = controller.getDifficultyId();
@@ -1231,7 +1318,6 @@ public class MainGameWindowController {
      * Wyswietla okno z zapisana instrukcja i zasadami gry.
      * Okno otwiera sie na oddzielnym watku!!
      */
-
     @FXML
     public void showRulesWindow() {
         if (gravitationTransition.getStatus() == Animation.Status.RUNNING) {

@@ -7,6 +7,24 @@ package ConfigClasses;
 public final class Config {
 
     /**
+     * Zmienna konfiguracyjna przetrzymujaca nazwe pliku konfiguracyjnego - opisujacego wyglad levelu 1
+     */
+    private String levelModel1FileName;
+    /**
+     * Zmienna konfiguracyjna przetrzymujaca nazwe pliku konfiguracyjnego - opisujacego wyglad levelu 2
+     */
+    private String levelModel2FileName;
+    /**
+     * Zmienna konfiguracyjna przetrzymujaca nazwe pliku konfiguracyjnego - opisujacego wyglad levelu 3
+     */
+    private String levelModel3FileName;
+    /**
+     * Zmienna konfiguracyjna przetrzymujaca nazwe pliku konfiguracyjnego - przetrzymujacego wszystkie uzyskane wyniki gry
+     */
+    private String playerResultsFileName;
+
+
+    /**
      * Zmienna konfiguracyjna, przetrzymująca nazwę okna głownego
      */
     private String mainWindowTitle;
@@ -30,7 +48,35 @@ public final class Config {
     private Level level;
 
     /**
-     * @return Zwraca wartość zmiennej String, mówiącej o tytule okna
+     * @return Zwraca wartość zmiennej String, mówiącej o nazwie pliku konfiguracyjnego
+     */
+    public String getLevelModel1FileName() {
+        return levelModel1FileName;
+    }
+
+    /**
+     * @return Zwraca wartość zmiennej String, mówiącej o nazwie pliku konfiguracyjnego
+     */
+    public String getLevelModel2FileName() {
+        return levelModel2FileName;
+    }
+
+    /**
+     * @return Zwraca wartość zmiennej String, mówiącej o nazwie pliku konfiguracyjnego
+     */
+    public String getLevelModel3FileName() {
+        return levelModel3FileName;
+    }
+
+    /**
+     * @return Zwraca wartość zmiennej String, mówiącej o nazwie pliku konfiguracyjnego
+     */
+    public String getPlayerResultsFileName() {
+        return playerResultsFileName;
+    }
+
+    /**
+     * @return Zwraca wartość zmiennej String, mówiącej o nazwie pliku konfiguracyjnego
      */
     public String getMainWindowTitle() {
         return mainWindowTitle;

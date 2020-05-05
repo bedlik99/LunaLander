@@ -1,6 +1,7 @@
 package ConfigClasses.LevelModelClass;
 
 import DataModelJSON.Data;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 
@@ -52,6 +53,11 @@ public final class LevelModel {
      */
     private List<Double> tankFuelPeakValues = new ArrayList<>();
 
+    /**
+     * Kontener - Lista przechowywujaca punkty elementu - gwiazdy
+     */
+    private List<Double> starPeakValues = new ArrayList<>();
+
 
     // tutaj mozliwe ze w przypadku wyglądu powierzchni planety - będziemy wysyłać do funkcji listę kształtów(Polygon)
     // i okaże się lepsze zapisanie każdemu wielokątowi oddzielnie wartości wieszkołków
@@ -68,20 +74,26 @@ public final class LevelModel {
      * @param leftBorderPolygon Wielokąt opisujący wygląd lewej granicy planszy
      * @param rightBorderPolygon Wielokąt opisujący wygląd prawej granicy planszy
      * @param tankFuelPolygon Wielokąt opisujący wygląd zbiornika z paliwem
+     * @param starPolygon Wielokąt opisujący wygląd gwiazdy
      * @see Polygon
      */
-    public void paintLevel(Polygon surfacePolygon,Polygon spaceCraftPolygon,Polygon leftBorderPolygon, Polygon rightBorderPolygon, Polygon tankFuelPolygon ){
+    public void paintLevel(Polygon surfacePolygon,Polygon spaceCraftPolygon,Polygon leftBorderPolygon,
+                           Polygon rightBorderPolygon, Polygon tankFuelPolygon, Polygon starPolygon ){
 
-        //surfacePolygon.setStroke(Color.MIDNIGHTBLUE);
+        surfacePolygon.setStroke(Color.DARKGRAY);
         surfacePolygon.setFill(new ImagePattern(Data.getSurfaceImage()));
         leftBorderPolygon.setFill(new ImagePattern(Data.getSurfaceImage()));
         rightBorderPolygon.setFill(new ImagePattern(Data.getSurfaceImage()));
         tankFuelPolygon.setFill(new ImagePattern(Data.getTankFuelImage()));
         spaceCraftPolygon.setFill(new ImagePattern(Data.getSpaceCraftImage()));
+        starPolygon.setFill(new ImagePattern(Data.getStarImage()));
 
 
+        starPolygon.getPoints().addAll(starPeakValues);
         tankFuelPolygon.getPoints().addAll(tankFuelPeakValues);
         spaceCraftPolygon.getPoints().addAll(spaceCraftPeakValues);
+
+
 
         if(leftBorderPolygon.getPoints().isEmpty()){
             leftBorderPolygon.getPoints().addAll(borderPeakValues);
@@ -110,6 +122,12 @@ public final class LevelModel {
     }
 
 
+    /**
+     * @return Getter zwracajcy liste przechowywujaca punkty opisujace ksztalt wielokata, gwiazdy
+     */
+    public List<Double> getStarPeakValues() {
+        return starPeakValues;
+    }
     /**
      * @return Getter zwracajcy liste przechowywujaca punkty opisujace ksztalt wielokata, baku paliwa
      */

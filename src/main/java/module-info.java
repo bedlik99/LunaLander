@@ -1,4 +1,4 @@
-module LunaLander {
+module proze20l_bedlinski_karp {
 
     requires javafx.controls;
     requires javafx.fxml;
@@ -13,6 +13,5 @@ module LunaLander {
     opens DataModelJSON;
     opens ConfigClasses.LevelModelClass;
     opens mainWindow.Controllers;
-
 
 }

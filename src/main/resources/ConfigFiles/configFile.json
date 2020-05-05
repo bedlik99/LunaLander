@@ -1,4 +1,8 @@
 {
+  "levelModel1FileName":"levelModel1.json" ,
+  "levelModel2FileName":"levelModel2.json" ,
+  "levelModel3FileName":"levelModel3.json" ,
+  "playerResultsFileName":"playersResults.txt" ,
   "mainWindowTitle":"LunaLander",
   "windowWidth":900.0,
   "windowHeight":700.0,
@@ -10,24 +14,24 @@
       "Level3"
     ],
       "healthPoint": [
+        4,
         3,
-        2,
         2
       ],
       "gravityForce": [
-        6,
-        4,
-        3.5
+        10,
+        7,
+        5
       ],
       "amountOfFuel": [
-        0.0035,
-        0.0045,
-        0.0050
+        0.0015,
+        0.0025,
+        0.0030
       ],
       "basicPointsForLevel": [
         400,
-        580,
-        700
+        600,
+        850
       ]
 
   }

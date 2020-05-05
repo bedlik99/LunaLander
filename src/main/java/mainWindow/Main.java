@@ -13,6 +13,7 @@ import ConfigClasses.Config;
  * wczytanie głównego okna aplikacji, oraz wykonanie pewnych działań konfiguracyjnych przed włączeniem okna
  */
 public class Main extends Application {
+    private final static String mainConfigFileName = "configFile.json";
 
     /**
      * Metoda wywoływana po metodzie init()(gdy metoda init() zreturnuje)
@@ -37,11 +38,11 @@ public class Main extends Application {
      */
     @Override
     public void init() throws Exception {
-        Data.loadSetupFile("configFile.json");
-        Data.loadSetupFile("levelModel1.json");
-        Data.loadSetupFile("levelModel2.json");
-        Data.loadSetupFile("levelModel3.json");
-        Data.loadResults("playersResults.txt");
+        Data.loadSetupFile(mainConfigFileName);
+        Data.loadSetupFile(Data.getConfig().getLevelModel1FileName());
+        Data.loadSetupFile(Data.getConfig().getLevelModel2FileName());
+        Data.loadSetupFile(Data.getConfig().getLevelModel3FileName());
+        Data.loadResults(Data.getConfig().getPlayerResultsFileName());
 
     }
 
@@ -51,7 +52,7 @@ public class Main extends Application {
      */
     @Override
     public void stop() throws Exception {
-         Data.saveResults("playersResults.txt");
+         Data.saveResults(Data.getConfig().getPlayerResultsFileName());
     }
 
     /**

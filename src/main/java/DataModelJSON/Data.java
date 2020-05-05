@@ -70,6 +70,14 @@ public abstract class Data {
      */
     private final static Image tankFuelImage = new Image("tankFuel.png");
 
+    private final static Image starImageEmpty = new Image("starIconEmpty.png");
+
+    /**
+     * Obiekt klasy Image, przechowywujący obiekt graficzny(zdjęcie.png) gwiazdy
+     * Wykorzystywany przy tworzeniu poziomu - wtedy rysujemy  gwiazde.
+     */
+    private final static Image starImage = new Image("starIcon.png");
+
     /**
      * Obiekt klasy zawierającej główne zmienne konfiguracyjne - Rozmiary okna,punkty za poziom, nazwa okna itd.
      * Inicjalizacja pól tej zmiennej jest wykonywana przez wczytanie pliku konfiguracyjnego "do" tej klasy, wykorzystując
@@ -93,13 +101,11 @@ public abstract class Data {
      */
     private static LevelModel levelModel1, levelModel2, levelModel3;
 
-
     /**
      * Obiekt z pozwalający na wczytywanie specyficznego ułożenia danych w pliku *.json i mapowanie go na konkretny
      * Obiekt posiadający dane ułożenie i vice-versa.
      */
     private static ObjectMapper mapper = getDefaultObjectMapper();
-
 
     /**
      * Obiekt pozwalający na parsowanie wczytanego pliku na JSON obiekt - Jest to przejściowy etap potrzebny do poprawnego
@@ -122,6 +128,17 @@ public abstract class Data {
         listOfPlayers.add(player);
     }
 
+
+    public static Image getStarImageEmpty() {
+        return starImageEmpty;
+    }
+
+    /**
+     * @return zwraca zmienna przechowywujaca zdjecie gwiazdy
+     */
+    public static Image getStarImage() {
+        return starImage;
+    }
     /**
      * @return zwraca zmienna przechowywujaca zdjecie zbiornika paliwa
      */
@@ -301,10 +318,13 @@ public abstract class Data {
      * I ten gracz jest dodawany do Listy Observable - listy wszystkich graczy
      * @param fileName Nazwa pliku tutaj jest to playersResults.txt
      * @throws IOException Wyjatek wyrzuca sie jezeli nie znajdzie takiego pliku
+     * @throws URISyntaxException Wyjatek wyrzuca sie jezeli blad w sciezce do pliku
      */
-    public static void loadResults(String fileName) throws IOException{
-        
-        Path path =  Paths.get("src/main/resources/ConfigFiles/",fileName);
+    public static void loadResults(String fileName) throws IOException, URISyntaxException {
+
+        URL res = Data.class.getResource("/ConfigFiles/" + fileName);
+        Path path = Paths.get(res.toURI());
+        //Path path =  Paths.get("src/main/resources/ConfigFiles/",fileName);
 
         try (BufferedReader br = Files.newBufferedReader(path)) {
             String input;
@@ -331,10 +351,13 @@ public abstract class Data {
      * Lista Observable - listOfPlayers jest zawsze uzupelniana podczas wlaczania gry i potem sa ewentualnie dopisywani gracze
      * @param fileName nazwa pliku tutaj - playersResults.txt
      * @throws IOException Wyjatek jest rzucany jezeli nie udalo sie otworzyc pliku
+     * @throws URISyntaxException Wyjatek wyrzuca sie jezeli blad w sciezce do pliku
      */
-    public static void saveResults(String fileName) throws IOException {
+    public static void saveResults(String fileName) throws IOException, URISyntaxException {
 
-        Path path = Paths.get("src/main/resources/ConfigFiles/",fileName);
+        URL res = Data.class.getResource("/ConfigFiles/" + fileName);
+        Path path = Paths.get(res.toURI());
+        //Path path = Paths.get("src/main/resources/ConfigFiles/",fileName);
 
         try (BufferedWriter bw = Files.newBufferedWriter(path)) {
             int i = 1;

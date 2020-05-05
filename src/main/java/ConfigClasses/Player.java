@@ -57,6 +57,9 @@ public class Player  {
      */
     public void setGamingResult(double gamingResult) {
         this.gamingResult = this.gamingResult + gamingResult;
+        if(this.gamingResult < 0) {
+            this.gamingResult = 0;
+        }
     }
 
     /**
