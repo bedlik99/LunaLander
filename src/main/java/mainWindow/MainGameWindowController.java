@@ -419,12 +419,12 @@ public class MainGameWindowController {
             @Override
             public void handle(KeyEvent keyEvent) {
 
-                if (pauseWasMade && (keyEvent.getCode().equals(KeyCode.S) || keyEvent.getCode().equals(KeyCode.D) || keyEvent.getCode().equals(KeyCode.A))) {
+                if (pauseWasMade && (keyEvent.getCode().equals(KeyCode.W) || keyEvent.getCode().equals(KeyCode.D) || keyEvent.getCode().equals(KeyCode.A))) {
                     // nie dotykac - naprawa bugu
 
                 } else {
 
-                    if (keyEvent.getCode().equals(KeyCode.S) && gravitationTransition.getStatus() == Animation.Status.RUNNING) {
+                    if (keyEvent.getCode().equals(KeyCode.W) && gravitationTransition.getStatus() == Animation.Status.RUNNING) {
                         locationForGravitation = spaceCraftPolygon.translateYProperty().getValue();
                         is_S_released = true;
                         rate = 0.5;
@@ -450,7 +450,7 @@ public class MainGameWindowController {
             @Override
             public void handle(KeyEvent keyEvent) {
 
-                if (pauseWasMade && (keyEvent.getCode().equals(KeyCode.S) || keyEvent.getCode().equals(KeyCode.D) || keyEvent.getCode().equals(KeyCode.A))) {
+                if (pauseWasMade && (keyEvent.getCode().equals(KeyCode.W) || keyEvent.getCode().equals(KeyCode.D) || keyEvent.getCode().equals(KeyCode.A))) {
                     // nie dotykac - naprawa bugu
                 } else {
 
@@ -479,7 +479,7 @@ public class MainGameWindowController {
 
                     }
 
-                    if (keyEvent.getCode().equals(KeyCode.S) && gravitationTransition.getStatus() == Animation.Status.RUNNING) {
+                    if (keyEvent.getCode().equals(KeyCode.W) && gravitationTransition.getStatus() == Animation.Status.RUNNING) {
 
                         is_S_released = false;
                         if (!isDestroyed && fuel > 0 && gravitationTransition.getStatus() != Animation.Status.PAUSED) {
@@ -558,7 +558,6 @@ public class MainGameWindowController {
 
 
     public void animateStar(Polygon starPolygon){
-        if (starScaleTransition.getStatus() == Animation.Status.STOPPED || starScaleTransition.getStatus() == Animation.Status.PAUSED ) {
 
 
             if(levelToLoad == 1){
@@ -579,7 +578,6 @@ public class MainGameWindowController {
             starScaleTransition.setNode(starPolygon);
             starScaleTransition.play();
 
-        }
     }
 
     /**
@@ -1233,6 +1231,7 @@ public class MainGameWindowController {
                 if (result.isPresent() && result.get() == ButtonType.APPLY) {
                     leftPlanet = false;
                     labelPoints.setText("0");
+		    durationOfPlay.setText("0");
                     healthPoints.setText("" + levelsDetails.getHealthPoint().get(controller.getDifficultyId()));
                     healthP = levelsDetails.getHealthPoint().get(controller.getDifficultyId());
                     difficultyId = controller.getDifficultyId();
