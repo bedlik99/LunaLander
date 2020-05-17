@@ -9,6 +9,13 @@ Aby otworzyc dokumentacje JavaDoc nalezy wybrac plik o scieżce:
 
 I uruchomić go w przeglądarce internetowej.
 
+Aplikacja serwera również korzysta z narzędzia Maven.
+
+Do uruchomienia serwera:
+```bash
+mvn compile
+mvn exec:java
+```
 
 Do uruchomienia aplikacji:
 ```bash
