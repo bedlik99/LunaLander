@@ -62,12 +62,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>11</version>
         </dependency>
-
-
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.2</version>
             <exclusions>
                 <exclusion>
                     <artifactId>hamcrest-junit</artifactId>
@@ -75,7 +74,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
 
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
