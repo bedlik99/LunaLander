@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="mainWindow.Controllers.RulesWindowController"
+            prefHeight="400.0" prefWidth="600.0">
+    <content>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            <VBox GridPane.columnIndex="0" spacing="40" alignment="CENTER" style="-fx-border-color: navy; -fx-border-width: 2">
+                <Text text="Ogolne informacje:" style="-fx-font-weight: bold" />
+                <Text text="** Masz 3 poziomy do przejscia. Mozesz wybrac poziom trudnosci" />
+                <Text text="** Na przejscie wszystkich poziomow masz okreslona liczbe zyc." />
+                <Text text="** Latwy - 4 Hp, Sredni - 3 Hp, Trudny - 2 Hp" />
+                <Text text="** Zebranie baku paliwa odnawia czesc paliwa" />
+                <Text text="Scenariusz:" style="-fx-font-weight: bold"/>
+                <Text text="*Sila grawitacji sciaga statek kosmiczny na powierzchnie planety..." />
+                <Text text="*Aby wyladowac prawidlowo nalezy wyladowac z odpowiednia predkoscia oraz na równym podlozu. " wrappingWidth="400" style="-fx-font-weight: bold" />
+                <Text text="*Obserwuj predkosc statku,ilosc paliwa ORAZ szukaj rownego podloza do wyladowania aby nie rozbic statku!" wrappingWidth="400"  />
+            </VBox>
+
+            <VBox GridPane.columnIndex="1" spacing="30" alignment="CENTER" style="-fx-border-color: navy; -fx-border-width: 2">
+                <Text text="Sterowanie:" style="-fx-font-weight: bold"/>
+                <Text text="* 'D': zwiekszenie predkosci w prawo (do prawej strony)" />
+                <Text text="* 'A': zwiekszenie predkosci w lewo (do lewej strony)"/>
+                <Text text="* 'W': zwiekszenie predkosci do gory (Do gory)"/>
+                <Text text="* Przycisk 'P' : P-auzuj gre" style="-fx-font-weight: bold"/>
+                <Text text="* Przycisk 'O' : O-dpauzuj gre" style="-fx-font-weight: bold"/>
+
+                <Text text="Zasady Punktacji! "  style= "-fx-font-weight: bold" />
+                <Text text="**Otrzymasz wiecej punktow gdy: "/>
+                <Text text= "1.Przejdziesz poziom w krotszym czasie." />
+                <Text text=" 2.Zakonczysz poziom z wieksza ilosc paliwa w baku. " />
+                <Text text=" 3.Grasz na wyzszym poziomie trudnosci." />
+                <Text text=" 4.Zebranie gwiazdy daje punkty 150 lub 300 lub 450. Zalezy od poziomu trudnosci" />
+
+            </VBox>
+
+
+        </GridPane>
+
+
+    </content>
+
+</DialogPane>

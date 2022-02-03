@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.Group?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="mainWindow.Controllers.StartGameWindowController"
+            prefHeight="400.0" prefWidth="600.0">
+    <headerText>Wybierz poziom trudnosci, a nastepnie uzyj przycisku APPLY aby rozpoczac gre!</headerText>
+    <content>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints  percentWidth="100"/>
+            </columnConstraints>
+            <VBox GridPane.rowIndex="0" spacing="15" prefHeight="250" style="-fx-border-color: black; -fx-border-width: 2" alignment="BASELINE_CENTER">
+                <Label text="Wybierz poziom trudnosci: "/>
+                <fx:define>
+                    <ToggleGroup fx:id="diffLvLGroup" />
+                </fx:define>
+                <RadioButton text="Latwy" toggleGroup="$diffLvLGroup"  alignment="TOP_CENTER"/>
+                <RadioButton fx:id="mediumDiff" text="Sredni" toggleGroup="$diffLvLGroup" alignment="CENTER"/>
+                <RadioButton text="Trudny" toggleGroup="$diffLvLGroup" alignment="BOTTOM_CENTER"/>
+
+            </VBox>
+
+        </GridPane>
+
+    </content>
+
+</DialogPane>
