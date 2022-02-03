@@ -1,12 +1,8 @@
 package ServerMain;
 
-import ConfigClasses.Player;
 import DataModelJSON.Data;
-
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.URISyntaxException;
-import java.util.LinkedHashSet;
 
 public class Main {
     private final static String mainConfigFileName = "configFile.json";
@@ -24,7 +20,6 @@ public class Main {
 
     }
 
-
     static {
         Data.receiveString(mainConfigFileName);
         Data.receiveString(Data.getConfig().getLevelModel1FileName());
@@ -38,7 +33,6 @@ public class Main {
             System.out.println("Blad serwera - nie udalo sie wczytac plikow: " + e.getMessage());
         }
     }
-
 
 
 }
